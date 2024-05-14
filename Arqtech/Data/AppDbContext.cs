@@ -9,6 +9,7 @@ namespace Arqtech.Data
         public AppDbContext(DbContextOptions options) : base(options) { }
 
         public DbSet<LojaModel> Lojas { get; set; }
+        public DbSet<CargoModel> Cargos { get; set; }
         public DbSet<EtapaModel> Etapas { get; set; }
         public DbSet<ProjetoModel> Projetos { get; set; }
         public DbSet<UsuarioModel> Usuarios { get; set; }
@@ -17,9 +18,13 @@ namespace Arqtech.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new ConfiguracaoUsuario());
-            modelBuilder.ApplyConfiguration(new ConfiguracaoProjeto());
             modelBuilder.ApplyConfiguration(new ConfiguracaoLoja());
+            modelBuilder.ApplyConfiguration(new ConfiguracaoEtapa());
+            modelBuilder.ApplyConfiguration(new ConfiguracaoCargo());
+            modelBuilder.ApplyConfiguration(new ConfiguracaoProjeto());
+            modelBuilder.ApplyConfiguration(new ConfiguracaoUsuario());
+            modelBuilder.ApplyConfiguration(new ConfiguracaoMaterial());
+            modelBuilder.ApplyConfiguration(new ConfiguracaoListaMaterial());
         }
     }
 }

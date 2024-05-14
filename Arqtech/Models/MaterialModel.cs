@@ -8,10 +8,9 @@
 
 
         public int LojaId { get; set; }
-        public LojaModel Loja { get; set; }
+        public virtual LojaModel Loja { get; set; }
 
 
-        public int ListaMaterialId { get; set; }
-        public virtual ListaMaterialModel ListaMaterial { get; set; }
+        public virtual ListaMaterialModel ListaMateriais { get; set; }
     }
 }

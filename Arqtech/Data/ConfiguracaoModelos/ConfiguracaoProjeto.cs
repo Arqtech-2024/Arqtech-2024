@@ -12,9 +12,8 @@ namespace Arqtech.Data.ConfiguracaoModelos
                 .HasKey(p => p.ProjetoId);
 
             builder
-                .HasOne(p => p.ListaMaterial)
-                .WithOne(l => l.Projeto)
-                .HasForeignKey<ProjetoModel>(p => p.ListaMaterialId);
+                .Property(p => p.ProjetoId)
+                .ValueGeneratedOnAdd();
 
             builder
                 .HasOne(p => p.Usuario)

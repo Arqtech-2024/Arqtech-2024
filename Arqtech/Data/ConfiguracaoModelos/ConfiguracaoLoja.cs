@@ -12,6 +12,10 @@ namespace Arqtech.Data.ConfiguracaoModelos
                 .HasKey(l => l.LojaId);
 
             builder
+                .Property(l => l.LojaId)
+                .ValueGeneratedOnAdd();
+
+            builder
                 .HasMany(l => l.Materiais)
                 .WithOne(m => m.Loja)
                 .HasForeignKey(m => m.MaterialId);
