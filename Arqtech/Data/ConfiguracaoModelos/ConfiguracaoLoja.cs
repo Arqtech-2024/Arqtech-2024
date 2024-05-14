@@ -1,0 +1,21 @@
+﻿using Arqtech.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace Arqtech.Data.ConfiguracaoModelos
+{
+    public class ConfiguracaoLoja : IEntityTypeConfiguration<LojaModel>
+    {
+        public void Configure(EntityTypeBuilder<LojaModel> builder)
+        {
+            builder
+                .HasKey(l => l.LojaId);
+
+            builder
+                .HasMany(l => l.Materiais)
+                .WithOne(m => m.Loja)
+                .HasForeignKey(m => m.MaterialId);
+                
+        }
+    }
+}
