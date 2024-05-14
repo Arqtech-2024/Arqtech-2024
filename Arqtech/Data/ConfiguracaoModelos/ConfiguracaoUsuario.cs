@@ -19,6 +19,10 @@ namespace Arqtech.Data.ConfiguracaoModelos
                 .HasOne(u => u.Cargo)
                 .WithOne(c => c.Usuario)
                 .HasForeignKey<UsuarioModel>(u => u.CargoId);
+
+            builder
+                .HasIndex(u => u.Cpf)
+                .IsUnique();
         }
     }
 }
