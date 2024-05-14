@@ -8,7 +8,6 @@
         public string NomeEtapa { get; set; }
         public string DescricaoEtapa { get; set; }
         public int DiasCorridos { get; set; }
-        public int UsuarioLista { get; set; }
 
 
         public int ProjetoId { get; set; }
