@@ -2,26 +2,22 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-body p-5">
-                    <h3 class="mb-5">Logar</h3>
-                    <form asp-controller="Usuario" asp-action="Login" method="post">
-                        <div class="form-outline form-group mb-4 d-flex flex-column">
-                            <input placeholder="conta@outlook.com" asp-for="Email" type="email" class="form-control" />
-                            <label asp-for="Email" class="ms-1 mt-1 form-label">Email</label>
-                            <span asp-validation-for="Email" class="text-danger mt-2"></span>
-                        </div>
-                        <div class="form-outline form-group mb-4 d-flex flex-column">
-                            <input asp-for="Password" type="password" class="form-control" />
-                            <label asp-for="Password" class="ms-1 mt-1 form-label">Senha</label>
-                            <span asp-validation-for="Password" class="text-danger mt-2"></span>
-                        </div>
-                        <button class="btn btn-outline-primary" type="submit">Login</button>
-                    </form>
+        <div class="p-5">
+            <h3 class="mb-5" style="color:black">Logar</h3>
+            <form asp-controller="Usuario" asp-action="Login" method="post">
+                <div class="col-6">
+                    <label asp-for="Email" class="ms-1 mt-1 form-label">Email</label>
+                    <input placeholder="conta@outlook.com" asp-for="Email" type="email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger mt-2"></span>
                 </div>
-
-            </div>
+                <div class="col-6">
+                    <label asp-for="Password" class="ms-1 mt-1 form-label">Senha</label>
+                    <input asp-for="Password" type="password" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger mt-2"></span>
+                </div>
+                <br />
+                <button class="btn btn-success" type="submit">Login</button>
+            </form>
         </div>
     </div>
 </div>
