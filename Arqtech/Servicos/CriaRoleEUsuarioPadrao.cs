@@ -125,9 +125,9 @@ namespace Arqtech.Servicos
 
                 user.Nome = "Admin";
                 user.Sobrenome = "Caio";
-                user.UserName = "admin@localhost";
-                user.Email = "admin@localhost";
-                user.NormalizedUserName = "ADMIN@LOCALHOST";
+                user.UserName = "admin@teste.com";
+                user.Email = "admin@teste.com";
+                user.NormalizedUserName = "ADMIN@TESTE.COM";
                 user.Cpf = "55555555555";
                 user.Cargo = TipoCargoEnum.Admin;
                 user.DataNascimento = DateTime.Now;

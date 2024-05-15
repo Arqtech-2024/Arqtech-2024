@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Arqtech.Migrations
 {
     /// <inheritdoc />
-    public partial class ajustegeral : Migration
+    public partial class configinicial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -32,7 +32,7 @@ namespace Arqtech.Migrations
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Sobrenome = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DataNascimento = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DataNascimento = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Cpf = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Admin = table.Column<bool>(type: "bit", nullable: false),
                     Licenca = table.Column<string>(type: "nvarchar(max)", nullable: true),
