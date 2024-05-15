@@ -13,7 +13,7 @@
         public virtual ListaMaterialModel ListaMaterial { get; set; }
 
 
-        public int UsuarioId { get; set; }
+        public string UsuarioId { get; set; }
         public virtual UsuarioModel Usuario { get; set; }
 
 

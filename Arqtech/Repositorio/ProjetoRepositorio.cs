@@ -29,7 +29,7 @@ namespace Arqtech.Repositorio
             return await _context.Projetos.ToListAsync();
         }
 
-        public async Task<List<ProjetoModel>> BuscaProjetosPorUsuario(int usuarioId)
+        public async Task<List<ProjetoModel>> BuscaProjetosPorUsuario(string usuarioId)
         {
             return await _context.Projetos
                                  .Where(p => p.UsuarioId == usuarioId)

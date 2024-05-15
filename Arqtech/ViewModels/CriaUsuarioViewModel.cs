@@ -12,21 +12,19 @@ namespace Arqtech.ViewModels
         public string Sobrenome { get; set; }
 
         [Required(ErrorMessage = "Insira a data de nascimento")]
-        public string DataNascimento { get; set; }
+        public DateTime DataNascimento { get; set; }
 
         [Required(ErrorMessage = "Insira o CPF")]
         public string Cpf { get; set; }
 
+        [Required(ErrorMessage = "Insira o e-mail")]
+        public string Email { get; set; }
+
         [Required(ErrorMessage = "Insira a senha")]
         public string Senha { get; set; }
-
-        [Required(ErrorMessage = "Insira sua licença")]
         public string? Licenca { get; set; }
 
         [Required(ErrorMessage = "Selecione o seu cargo")]
         public string Cargo { get; set; }
-
-
-        public bool Admin { get; set; }
     }
 }

@@ -9,16 +9,7 @@ namespace Arqtech.Data.ConfiguracaoModelos
         public void Configure(EntityTypeBuilder<UsuarioModel> builder)
         {
             builder
-                .HasKey(u => u.UsuarioId);
-
-            builder
-                .Property(u => u.UsuarioId)
-                .ValueGeneratedOnAdd();
-
-            builder
-                .HasOne(u => u.Cargo)
-                .WithOne(c => c.Usuario)
-                .HasForeignKey<UsuarioModel>(u => u.CargoId);
+                .HasKey(u => u.Id);
 
             builder
                 .HasIndex(u => u.Cpf)

@@ -1,6 +1,4 @@
-﻿using System.Drawing;
-
-namespace Arqtech.ViewModels
+﻿namespace Arqtech.ViewModels
 {
     public class LogaUsuarioViewModel
     {
