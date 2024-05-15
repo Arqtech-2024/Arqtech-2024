@@ -20,7 +20,7 @@ namespace Arqtech.Controllers
             _signInManager = signInManager;
         }
 
-        [Authorize(Roles = "Admin, Engenheiro, Arquiteto")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> IndexUsuario()
         {
             var usuarios = await _usuarioRepositorio.BuscaTodosUsuarios();
@@ -73,7 +73,7 @@ namespace Arqtech.Controllers
 
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("IndexUsuario");
+                    return RedirectToAction("Index", "Home");
                 }
                 else
                 {
