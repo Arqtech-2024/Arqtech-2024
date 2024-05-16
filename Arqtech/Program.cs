@@ -17,12 +17,15 @@ builder.Services.AddDbContext<AppDbContext>(opt =>
     opt.UseSqlServer(connectionString);
 });
 
+builder.Services.AddScoped<LojaRepositorio>();
 builder.Services.AddScoped<UsuarioRepositorio>();
+
 builder.Services.AddScoped<ICriaRoleEUsuarioPadrao, CriaRoleEUsuarioPadrao>();
 
 builder.Services.AddIdentity<UsuarioModel, IdentityRole>()
     .AddEntityFrameworkStores<AppDbContext>()
     .AddDefaultTokenProviders();
+
 var app = builder.Build();
 
 if (!app.Environment.IsDevelopment())

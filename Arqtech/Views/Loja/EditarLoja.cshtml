@@ -1,0 +1,63 @@
+﻿@model LojaModel
+
+@{
+    ViewData["Title"] = "Editar Loja";
+}
+
+<div class="container-fluid">
+    <div class="p-3 mb-3">
+        <h3 class="text-left" style="color: white">Detalhes da Loja</h3>
+    </div>
+    <br />
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Informações da Loja</h4>
+                    <form asp-controller="Loja" asp-action="SalvarEdicaoLoja" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="LojaId" />
+                        <div class="row">
+                            <div class="form-group">
+                                <label asp-for="Nome" class="control-label">Nome:</label>
+                                <input asp-for="Nome" class="form-control" />
+                                <span asp-validation-for="Nome" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <label asp-for="Descricao" class="control-label">Descrição:</label>
+                                <input asp-for="Descricao" class="form-control" />
+                                <span asp-validation-for="Descricao" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <label asp-for="Logradouro" class="control-label">Logradouro:</label>
+                                <input asp-for="Logradouro" class="form-control" />
+                                <span asp-validation-for="Logradouro" class="text-danger"></span>
+                            </div>
+                            <div class="col-6">
+                                <label asp-for="Numero" class="control-label">Número:</label>
+                                <input asp-for="Numero" class="form-control" />
+                                <span asp-validation-for="Numero" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <label asp-for="Cidade" class="control-label">Cidade:</label>
+                                <input asp-for="Cidade" class="form-control" />
+                                <span asp-validation-for="Cidade" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary col-5">Salvar</button>
+                            <a asp-controller="Loja" asp-action="IndexLoja" class="btn btn-secondary">Voltar para a Lista</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
