@@ -26695,4 +26695,17 @@ pre[class*="language-"] {
   }
 }
 
+.login-container{
+    height: 100vh;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-card{
+    width:100%;
+    max-width: 400px;
+    padding: 1.5rem;
+}
+
 /*# sourceMappingURL=dashboard-free.css.map */
