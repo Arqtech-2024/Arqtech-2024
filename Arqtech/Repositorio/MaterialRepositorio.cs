@@ -1,5 +1,6 @@
 ﻿using Arqtech.Data;
 using Arqtech.Models;
+using Arqtech.ViewModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace Arqtech.Repositorio
@@ -26,10 +27,36 @@ namespace Arqtech.Repositorio
                                  .ToListAsync();
         }
 
-        public async Task CriaMaterial(MaterialModel material)
+        public async Task<bool> CriaMaterial(CriaMaterialViewModel criaMaterialViewModel)
         {
-            await _context.Materiais.AddAsync(material);
-            await _context.SaveChangesAsync();
+            bool materialCriado = false;
+            var loja = await _context.Lojas.Where(c => c.LojaId == criaMaterialViewModel.LojaId).FirstAsync();
+
+            if (loja is not null)
+            {
+                try
+                {
+                    var novoMaterial = new MaterialModel
+                    {
+                        Descricao = criaMaterialViewModel.Descricao,
+                        Nome = criaMaterialViewModel.Nome,
+                        Preco = criaMaterialViewModel.Preco,
+                        Loja = loja,
+                        LojaId = loja.LojaId,
+                    };
+
+                    await _context.Materiais.AddAsync(novoMaterial);
+                    await _context.SaveChangesAsync();
+
+                    materialCriado = true;
+                }
+                catch (Exception)
+                {
+                    materialCriado = false;
+                }
+            }
+
+            return materialCriado;
         }
 
         public async Task<MaterialModel> BuscaMaterialPorId(int materialId)
