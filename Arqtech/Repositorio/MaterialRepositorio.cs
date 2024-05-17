@@ -14,7 +14,7 @@ namespace Arqtech.Repositorio
             _context = context;
         }
 
-        public async Task<IEnumerable<MaterialModel>> BuscaTodosMateriais()
+        public async Task<List<MaterialModel>> BuscaTodosMateriais()
         {
             return await _context.Materiais.ToListAsync();
         }

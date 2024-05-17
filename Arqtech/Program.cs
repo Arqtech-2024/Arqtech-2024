@@ -19,6 +19,7 @@ builder.Services.AddDbContext<AppDbContext>(opt =>
 
 builder.Services.AddScoped<LojaRepositorio>();
 builder.Services.AddScoped<UsuarioRepositorio>();
+builder.Services.AddScoped<MaterialRepositorio>();
 
 builder.Services.AddScoped<ICriaRoleEUsuarioPadrao, CriaRoleEUsuarioPadrao>();
 

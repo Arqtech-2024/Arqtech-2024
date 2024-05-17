@@ -13,9 +13,9 @@ namespace Arqtech.Controllers
             _materialRepositorio = materialRepositorio;
         }
 
-        public IActionResult IndexMaterial()
+        public async Task<IActionResult> IndexMaterial()
         {
-            var materiais = _materialRepositorio.BuscaTodosMateriais();
+            var materiais = await _materialRepositorio.BuscaTodosMateriais();
             return View(materiais);
         }
 
