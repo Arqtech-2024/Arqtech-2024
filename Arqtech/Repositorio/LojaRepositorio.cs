@@ -17,7 +17,7 @@ namespace Arqtech.Repositorio
             return await _context.Lojas.Where(l => l.LojaId == lojaId).FirstAsync();
         }
 
-        public async Task<IEnumerable<LojaModel>> BuscaTodasLojas()
+        public async Task<List<LojaModel>> BuscaTodasLojas()
         {
             return await _context.Lojas.ToListAsync();
         }

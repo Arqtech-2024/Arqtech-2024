@@ -14,11 +14,6 @@ namespace Arqtech.Data.ConfiguracaoModelos
             builder
                 .Property(l => l.ListaMaterialId)
                 .ValueGeneratedOnAdd();
-
-            builder
-                .HasMany(l => l.Materiais)
-                .WithOne(m => m.ListaMateriais)
-                .HasForeignKey(l => l.MaterialId);
         }
     }
 }

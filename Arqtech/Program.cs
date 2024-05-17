@@ -18,6 +18,7 @@ builder.Services.AddDbContext<AppDbContext>(opt =>
 });
 
 builder.Services.AddScoped<LojaRepositorio>();
+builder.Services.AddScoped<ProjetoRepositorio>();
 builder.Services.AddScoped<UsuarioRepositorio>();
 builder.Services.AddScoped<MaterialRepositorio>();
 

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Arqtech.Migrations
 {
     /// <inheritdoc />
-    public partial class configinicial : Migration
+    public partial class bancocompleto : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -63,8 +63,7 @@ namespace Arqtech.Migrations
                 columns: table => new
                 {
                     ListaMaterialId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    MaterialId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1")
                 },
                 constraints: table =>
                 {
@@ -78,7 +77,10 @@ namespace Arqtech.Migrations
                     LojaId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MaterialId = table.Column<int>(type: "int", nullable: false)
+                    Descricao = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Logradouro = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Numero = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Cidade = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -226,23 +228,25 @@ namespace Arqtech.Migrations
                 name: "Materiais",
                 columns: table => new
                 {
-                    MaterialId = table.Column<int>(type: "int", nullable: false),
+                    MaterialId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Preco = table.Column<double>(type: "float", nullable: false),
-                    LojaId = table.Column<int>(type: "int", nullable: false)
+                    Descricao = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LojaId = table.Column<int>(type: "int", nullable: false),
+                    ListaMateriaisListaMaterialId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Materiais", x => x.MaterialId);
                     table.ForeignKey(
-                        name: "FK_Materiais_ListaDeMateriais_MaterialId",
-                        column: x => x.MaterialId,
+                        name: "FK_Materiais_ListaDeMateriais_ListaMateriaisListaMaterialId",
+                        column: x => x.ListaMateriaisListaMaterialId,
                         principalTable: "ListaDeMateriais",
-                        principalColumn: "ListaMaterialId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "ListaMaterialId");
                     table.ForeignKey(
-                        name: "FK_Materiais_Lojas_MaterialId",
-                        column: x => x.MaterialId,
+                        name: "FK_Materiais_Lojas_LojaId",
+                        column: x => x.LojaId,
                         principalTable: "Lojas",
                         principalColumn: "LojaId",
                         onDelete: ReferentialAction.Cascade);
@@ -315,6 +319,16 @@ namespace Arqtech.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Materiais_ListaMateriaisListaMaterialId",
+                table: "Materiais",
+                column: "ListaMateriaisListaMaterialId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Materiais_LojaId",
+                table: "Materiais",
+                column: "LojaId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Projetos_ListaMaterialId",

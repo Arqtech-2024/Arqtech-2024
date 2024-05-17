@@ -4,6 +4,7 @@ using Arqtech.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Arqtech.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240517014452_banco-completo")]
+    partial class bancocompleto
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -140,15 +143,11 @@ namespace Arqtech.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProjetoId"));
 
-                    b.Property<int?>("EtapaId")
+                    b.Property<int>("EtapaId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ListaMaterialId")
+                    b.Property<int>("ListaMaterialId")
                         .HasColumnType("int");
-
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UsuarioId")
                         .IsRequired()
@@ -435,7 +434,9 @@ namespace Arqtech.Migrations
                 {
                     b.HasOne("Arqtech.Models.ListaMaterialModel", "ListaMaterial")
                         .WithMany()
-                        .HasForeignKey("ListaMaterialId");
+                        .HasForeignKey("ListaMaterialId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Arqtech.Models.UsuarioModel", "Usuario")
                         .WithMany("Projetos")

@@ -1,23 +1,24 @@
 ﻿@model LogaUsuarioViewModel
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="p-5">
-            <h3 class="mb-5" style="color:black">Logar</h3>
-            <form asp-controller="Usuario" asp-action="Login" method="post">
-                <div class="col-6">
-                    <label asp-for="Email" class="ms-1 mt-1 form-label">Email</label>
-                    <input placeholder="conta@outlook.com" asp-for="Email" type="email" class="form-control" />
-                    <span asp-validation-for="Email" class="text-danger mt-2"></span>
-                </div>
-                <div class="col-6">
-                    <label asp-for="Password" class="ms-1 mt-1 form-label">Senha</label>
-                    <input asp-for="Password" type="password" class="form-control" />
-                    <span asp-validation-for="Password" class="text-danger mt-2"></span>
-                </div>
-                <br />
+<div class="container login-container">
+    <div class="card login-card">
+        <h3 class="card-title text-center" style="color:black">Logar</h3>
+        <form asp-controller="Usuario" asp-action="Login" method="post">
+            <div class="form-group">
+                <label asp-for="Email" class="ms-1 mt-1 form-label">Email</label>
+                <input placeholder="conta@outlook.com" asp-for="Email" type="email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger mt-2"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="ms-1 mt-1 form-label">Senha</label>
+                <input asp-for="Password" type="password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger mt-2"></span>
+            </div>
+            <br />
+            <div class="text-center">
                 <button class="btn btn-success" type="submit">Login</button>
-            </form>
-        </div>
+            </div>
+
+        </form>
     </div>
 </div>

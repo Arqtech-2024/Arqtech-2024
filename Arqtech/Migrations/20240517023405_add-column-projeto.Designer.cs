@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Arqtech.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240516032835_ajuste-models")]
-    partial class ajustemodels
+    [Migration("20240517023405_add-column-projeto")]
+    partial class addcolumnprojeto
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -64,9 +64,6 @@ namespace Arqtech.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ListaMaterialId"));
 
-                    b.Property<int>("MaterialId")
-                        .HasColumnType("int");
-
                     b.HasKey("ListaMaterialId");
 
                     b.ToTable("ListaDeMateriais");
@@ -111,6 +108,14 @@ namespace Arqtech.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MaterialId"));
+
+                    b.Property<string>("Descricao")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ListaMateriaisListaMaterialId")
+                        .HasColumnType("int");
+
                     b.Property<int>("LojaId")
                         .HasColumnType("int");
 
@@ -122,6 +127,8 @@ namespace Arqtech.Migrations
                         .HasColumnType("float");
 
                     b.HasKey("MaterialId");
+
+                    b.HasIndex("ListaMateriaisListaMaterialId");
 
                     b.HasIndex("LojaId");
 
@@ -136,11 +143,15 @@ namespace Arqtech.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProjetoId"));
 
-                    b.Property<int>("EtapaId")
+                    b.Property<int?>("EtapaId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ListaMaterialId")
+                    b.Property<int?>("ListaMaterialId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UsuarioId")
                         .IsRequired()
@@ -408,15 +419,13 @@ namespace Arqtech.Migrations
 
             modelBuilder.Entity("Arqtech.Models.MaterialModel", b =>
                 {
+                    b.HasOne("Arqtech.Models.ListaMaterialModel", "ListaMateriais")
+                        .WithMany("Materiais")
+                        .HasForeignKey("ListaMateriaisListaMaterialId");
+
                     b.HasOne("Arqtech.Models.LojaModel", "Loja")
                         .WithMany("Materiais")
                         .HasForeignKey("LojaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Arqtech.Models.ListaMaterialModel", "ListaMateriais")
-                        .WithMany("Materiais")
-                        .HasForeignKey("MaterialId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -429,9 +438,7 @@ namespace Arqtech.Migrations
                 {
                     b.HasOne("Arqtech.Models.ListaMaterialModel", "ListaMaterial")
                         .WithMany()
-                        .HasForeignKey("ListaMaterialId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ListaMaterialId");
 
                     b.HasOne("Arqtech.Models.UsuarioModel", "Usuario")
                         .WithMany("Projetos")

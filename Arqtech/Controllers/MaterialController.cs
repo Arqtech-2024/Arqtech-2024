@@ -8,9 +8,11 @@ namespace Arqtech.Controllers
     public class MaterialController : Controller
     {
         private readonly MaterialRepositorio _materialRepositorio;
-        public MaterialController(MaterialRepositorio materialRepositorio)
+        private readonly LojaRepositorio _lojaRepositorio;
+        public MaterialController(MaterialRepositorio materialRepositorio, LojaRepositorio lojaRepositorio)
         {
             _materialRepositorio = materialRepositorio;
+            _lojaRepositorio = lojaRepositorio;
         }
 
         public async Task<IActionResult> IndexMaterial()
@@ -20,8 +22,9 @@ namespace Arqtech.Controllers
         }
 
         [HttpGet]
-        public IActionResult CriaMaterial() 
+        public async Task<IActionResult> CriaMaterial() 
         {
+            ViewBag.Lojas = await _lojaRepositorio.BuscaTodasLojas();
             return View();
         }
 
