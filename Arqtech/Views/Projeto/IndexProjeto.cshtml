@@ -36,8 +36,7 @@
                                     <td class="text-center">@projeto.ValorTotalProjeto.ToString("C2")</td>
                                     <td class="text-center">
                                         <div class="btn-group" role="group">
-                                            <a class="btn btn-primary rounded m-1" asp-controller="Projeto" asp-action="Detalhes" asp-route-id="@projeto.ProjetoId">Detalhes</a>
-                                            <a class="btn btn-outline-danger rounded m-1" asp-controller="Projeto" asp-action="Deletar" asp-route-id="@projeto.ProjetoId">Deletar</a>
+                                            <a class="btn btn-primary rounded m-1" asp-controller="Projeto" asp-action="DetalhesProjeto" asp-route-ProjetoId="@projeto.ProjetoId">Detalhes</a>
                                         </div>
                                     </td>
                                 </tr>

@@ -1,0 +1,126 @@
+﻿@model ProjetoModel
+
+@{
+    ViewData["Title"] = "Detalhes";
+}
+
+<div class="container-fluid">
+    <div class="p-3 mb-3">
+        <h3 class="text-left" style="color: white">Detalhes do Projeto</h3>
+    </div>
+    <br />
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title text-center">Projeto</h4>
+            <br />
+            <table class="table table-striped">
+                <tbody>
+                    <tr>
+                        <th scope="row" class="col-sm-3">Nome do projeto:</th>
+                        <td class="col-sm-9">@Model.Nome</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="col-sm-3">Logradouro:</th>
+                        <td class="col-sm-9">@Model.Logradouro</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="col-sm-3">Cidade:</th>
+                        <td class="col-sm-9">@Model.Cidade</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="col-sm-3">Numero:</th>
+                        <td class="col-sm-9">@Model.Numero</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="col-sm-3">Valor do Pedreiro:</th>
+                        <td class="col-sm-9">@Model.ValorPedreiro.ToString("C")</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="col-sm-3">Valor do Material:</th>
+                        <td class="col-sm-9">@Model.ValorMaterial.ToString("C")</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="col-sm-3">Valor do Projeto Arquiteto:</th>
+                        <td class="col-sm-9">@Model.ValorProjetoArquiteto.ToString("C")</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="col-sm-3">Valor Total do Projeto:</th>
+                        <td class="col-sm-9">@Model.ValorTotalProjeto.ToString("C")</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="col-sm-3">Usuário:</th>
+                        <td class="col-sm-9">@Model.Usuario.Nome</td>
+                    </tr>
+                </tbody>
+            </table>
+            <br />
+            <div class="form-group">
+                <label for="materialSelect">Selecione um Material:</label>
+                <select id="materialSelect" class="form-control">
+                    <option value="">Selecione...</option>
+                    @foreach (var material in ViewBag.Materiais)
+                    {
+                        <option value="@material.MaterialId">@material.Nome</option>
+                    }
+                </select>
+            </div>
+            <button id="btnAdicionarMaterial" class="btn btn-primary">Adicionar Material</button>
+            <ul id="listaMateriais" class="list-group mt-3">
+            </ul>
+            <button id="btnEnviarLista" class="btn btn-success mt-3">Enviar Lista</button>
+            <div class="text-center mt-3">
+                <a asp-action="IndexProjeto" asp-controller="Projeto" class="btn btn-secondary">Voltar para a Lista</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            var materiaisSelecionados = [];
+
+            $("#btnAdicionarMaterial").click(function () {
+                var materialId = $("#materialSelect").val();
+                var materialNome = $("#materialSelect option:selected").text();
+
+                if (materialId && !materiaisSelecionados.includes(materialId)) {
+                    materiaisSelecionados.push(materialId);
+
+                    $("#listaMateriais").append('<li class="list-group-item">' + materialNome + '</li> <input type="number" id="item-material-' + materialId + '" value="" />');
+                }
+            });
+
+            $("#btnEnviarLista").click(function () {
+
+                var itensMateriais = [];
+
+                for (var i = 1; i <= materiaisSelecionados.length; i++) 
+                {
+                    var id = materiaisSelecionados.find(x => x == i);
+                    var qtdeMaterial = $("#item-material-" + i).val();
+                    var objeto = { Key: i, Value: parseInt(qtdeMaterial) };
+                    var valorMaterial = parseFloat($("#materialSelect option[value='" + id + "']").data("Preco"));
+
+                    var objeto = { Id: i, Quantidade: parseInt(qtdeMaterial), Montante: montanteItem };
+                    itensMateriais.push(objeto);
+
+                    itensMateriais.push(objeto);
+                }
+
+                $.ajax({
+                    url: "/Projeto/CriarListaMaterial",
+                    type: "POST",
+                    contentType: "application/json",
+                    data: JSON.stringify(itensMateriais),
+                    success: function (data) {
+                        alert("Lista de materiais enviada com sucesso!");
+                    },
+                    error: function () {
+                        alert("Ocorreu um erro ao enviar a lista de materiais.");
+                    }
+                });
+            });
+        });
+    </script>
+}
