@@ -18,6 +18,7 @@
                             <th class="text-center text-black" scope="col">Nome</th>
                             <th class="text-center text-black" scope="col">Preço</th>
                             <th class="text-center text-black" scope="col">Descrição</th>
+                            <th class="text-center text-black" scope="col">Quantidade</th>
                             <th class="text-center text-black" scope="col">Loja</th>
                             <th class="text-center text-black" scope="col">Ações</th>
                         </tr>
@@ -29,11 +30,13 @@
                                 <td class="text-center">@material.Nome</td>
                                 <td class="text-center">@material.Preco.ToString("C2")</td>
                                 <td class="text-center">@material.Descricao</td>
+                                <td class="text-center">@material.Quantidade</td>
                                 <td class="text-center">@material.Loja.Nome</td>
                                 <td class="text-center">
                                     <div class="btn-group" role="group">
-                                        <a class="btn btn-primary rounded m-1" asp-controller="" asp-action="" asp-route-id="@material.MaterialId">Detalhes</a>
-                                        <a class="btn btn-outline-danger rounded m-1" asp-controller="" asp-action="" asp-route-id="@material.MaterialId">Deletar</a>
+                                        <a class="btn btn-primary rounded m-1" asp-controller="Material" asp-action="EditarMaterial" asp-route-MaterialId="@material.MaterialId">Editar</a>
+                                        <a class="btn btn-primary rounded m-1" asp-controller="Material" asp-action="DetalhesMaterial" asp-route-MaterialId="@material.MaterialId">Detalhes</a>
+                                        <a class="btn btn-outline-danger rounded m-1" asp-controller="Material" asp-action="DeletarMaterial" asp-route-MaterialId="@material.MaterialId">Deletar</a>
                                     </div>
                                 </td>
                             </tr>

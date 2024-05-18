@@ -77,14 +77,11 @@ namespace Arqtech.Controllers
             return View(projeto);
         }
 
-        public async Task<bool> CriarListaMaterial([FromBody] List<KeyValuePair<int, int>> materiaisSelecionados)
+        public async Task<bool> CriarListaMaterial([FromBody] List<CriaListaMaterialViewModel> listaMaterial)
         {
-            var listaDeMaterial = new List<MaterialModel>();
-
-            foreach(var item in materiaisSelecionados)
+            foreach(var item in listaMaterial)
             {
-                var id = item.Key;
-                var qtde = item.Value;
+
             }
 
             return true;

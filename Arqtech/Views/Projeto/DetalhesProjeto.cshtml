@@ -60,7 +60,7 @@
                     <option value="">Selecione...</option>
                     @foreach (var material in ViewBag.Materiais)
                     {
-                        <option value="@material.MaterialId">@material.Nome</option>
+                        <option value="@material.MaterialId;@material.Preco">@material.Nome</option>
                     }
                 </select>
             </div>
@@ -77,17 +77,26 @@
 
 @section Scripts {
     <script>
+        function calculaTotal(materialId, valorMaterial) {
+
+            var qtde = $("#item-material-" + materialId).val();
+            $("#totalMaterial-" + materialId).text(parseInt(qtde) * parseInt(valorMaterial));
+        }
         $(document).ready(function () {
             var materiaisSelecionados = [];
 
             $("#btnAdicionarMaterial").click(function () {
-                var materialId = $("#materialSelect").val();
+
+                var optionValue = $("#materialSelect").val().split(";");
+                var materialId = optionValue[0];
+
                 var materialNome = $("#materialSelect option:selected").text();
+                var valorMaterial = optionValue[1];
 
                 if (materialId && !materiaisSelecionados.includes(materialId)) {
                     materiaisSelecionados.push(materialId);
 
-                    $("#listaMateriais").append('<li class="list-group-item">' + materialNome + '</li> <input type="number" id="item-material-' + materialId + '" value="" />');
+                    $("#listaMateriais").append('<li class="list-group-item">' + materialNome + '</li> <input onchange="calculaTotal(' + materialId + ',' + valorMaterial + ')" type="number" id="item-material-' + materialId + '" value=""/> <p id="totalMaterial-' + materialId + '"></p>');
                 }
             });
 
@@ -95,15 +104,16 @@
 
                 var itensMateriais = [];
 
-                for (var i = 1; i <= materiaisSelecionados.length; i++) 
-                {
+                for (var i = 1; i <= materiaisSelecionados.length; i++) {
                     var id = materiaisSelecionados.find(x => x == i);
                     var qtdeMaterial = $("#item-material-" + i).val();
                     var objeto = { Key: i, Value: parseInt(qtdeMaterial) };
                     var valorMaterial = parseFloat($("#materialSelect option[value='" + id + "']").data("Preco"));
 
-                    var objeto = { Id: i, Quantidade: parseInt(qtdeMaterial), Montante: montanteItem };
+                    var objeto = { MaterialId: i, Quantidade: parseInt(qtdeMaterial), Preco: valorMaterial };
                     itensMateriais.push(objeto);
+
+                    console.log(objeto);
 
                     itensMateriais.push(objeto);
                 }

@@ -33,6 +33,18 @@ namespace Arqtech.Controllers
             return View();
         }
 
+        public  async Task<IActionResult> DetalhesUsuario(string usuarioId)
+        {
+            var usuario = await _userManager.FindByIdAsync(usuarioId);
+
+            if(usuario is null)
+            {
+                return NotFound();
+            }
+
+            return View(usuario);
+        }
+
         [HttpPost]
         public async Task<IActionResult> CriaUsuario(CriaUsuarioViewModel criaUsuarioViewModel)
         {
