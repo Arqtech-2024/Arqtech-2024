@@ -25,11 +25,15 @@ namespace Arqtech.Repositorio
                     Usuario = usuario,
                     UsuarioId = usuario.Id,
                     Nome = criaProjetoViewModel.Nome,
+                    Cidade = criaProjetoViewModel.Cidade,
+                    Logradouro = criaProjetoViewModel.Logradouro,
+                    Numero = criaProjetoViewModel.Numero,
                     ValorMaterial = criaProjetoViewModel.ValorMaterial,
                     ValorPedreiro = criaProjetoViewModel.ValorPedreiro,
                     ValorProjetoArquiteto = criaProjetoViewModel.ValorProjetoArquiteto,
                     ValorTotalProjeto = criaProjetoViewModel.ValorTotalProjeto,
                 };
+
                 try
                 {
                     await _context.AddAsync(projeto);
@@ -49,6 +53,8 @@ namespace Arqtech.Repositorio
         {
             return await _context.Projetos
                                  .Where(p => p.ProjetoId == projetoId)
+                                 .Include(p => p.Usuario)
+                                 .Include(p => p.ListaMaterial)
                                  .FirstAsync();
         }
 
@@ -63,7 +69,6 @@ namespace Arqtech.Repositorio
                                  .Where(p => p.UsuarioId == usuarioId)
                                  .Include(p => p.ListaMaterial)
                                  .Include(p => p.Usuario)
-                                 .Include(p => p.Etapas)
                                  .ToListAsync();
         }
     }

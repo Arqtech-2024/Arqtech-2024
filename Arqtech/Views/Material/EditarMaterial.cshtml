@@ -1,0 +1,60 @@
+﻿@model MaterialModel
+
+@{
+    ViewData["Title"] = "Editar Material";
+}
+
+<div class="container-fluid">
+    <div class="p-3 mb-3">
+        <h3 class="text-left" style="color: white">Detalhes do Material</h3>
+    </div>
+    <br />
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Informações do Material</h4>
+                    <form asp-controller="Material" asp-action="SalvarEdicaoMaterial" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="MaterialId" />
+                        <input type="hidden" asp-for="LojaId" />
+                        <input type="hidden" asp-for="Loja" />
+                        <div class="row">
+                            <div class="form-group">
+                                <label asp-for="Nome" class="control-label">Nome:</label>
+                                <input asp-for="Nome" class="form-control" />
+                                <span asp-validation-for="Nome" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <label asp-for="Preco" class="control-label">Preço:</label>
+                                <input asp-for="Preco" class="form-control" />
+                                <span asp-validation-for="Preco" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <label asp-for="Descricao" class="control-label">Descrição:</label>
+                                <input asp-for="Descricao" class="form-control" />
+                                <span asp-validation-for="Descricao" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <label asp-for="Quantidade" class="control-label">Quantidade:</label>
+                                <input asp-for="Quantidade" class="form-control" />
+                                <span asp-validation-for="Quantidade" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary col-5">Salvar</button>
+                            <a asp-controller="Material" asp-action="IndexMaterial" class="btn btn-secondary">Voltar para a Lista</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

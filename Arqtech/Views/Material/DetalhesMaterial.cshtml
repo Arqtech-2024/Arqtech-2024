@@ -1,0 +1,50 @@
+﻿@model MaterialModel
+
+@{
+    ViewData["Title"] = "Detalhes do Material";
+}
+
+<div class="container-fluid">
+    <div class="p-3 mb-3">
+        <h3 class="text-left" style="color: white">Detalhes do Material</h3>
+    </div>
+    <br />
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title text-center">Material</h4>
+            <br />
+            <table class="table table-striped">
+                <tbody>
+                    <tr>
+                        <th scope="row" class="col-sm-3">ID do Material:</th>
+                        <td class="col-sm-9">@Model.MaterialId</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="col-sm-3">Nome:</th>
+                        <td class="col-sm-9">@Model.Nome</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="col-sm-3">Preço:</th>
+                        <td class="col-sm-9">@Model.Preco.ToString("C")</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="col-sm-3">Descrição:</th>
+                        <td class="col-sm-9">@Model.Descricao</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="col-sm-3">Quantidade:</th>
+                        <td class="col-sm-9">@Model.Quantidade</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="col-sm-3">ID da Loja:</th>
+                        <td class="col-sm-9">@Model.LojaId</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="text-center mt-3">
+                <a asp-action="IndexMaterial" asp-controller="Material" class="btn btn-secondary">Voltar</a>
+                <a asp-action="EditarMaterial" asp-controller="Material" asp-route-MaterialId="@Model.MaterialId"  class="btn btn-secondary">Editar</a>
+            </div>
+        </div>
+    </div>
+</div>

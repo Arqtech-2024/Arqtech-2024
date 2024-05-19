@@ -17,12 +17,12 @@
                     <table class="table table-striped">
                         <thead class="table cor-unifaat">
                             <tr>
-                                <th class="text-center text-white" scope="col">Nome</th>
-                                <th class="text-center text-white" scope="col">Valor Pedreiro</th>
-                                <th class="text-center text-white" scope="col">Valor Material</th>
-                                <th class="text-center text-white" scope="col">Valor Projeto Arquiteto</th>
-                                <th class="text-center text-white" scope="col">Valor Total Projeto</th>
-                                <th class="text-center text-white" scope="col">Ações</th>
+                                <th class="text-center text-black" scope="col">Nome</th>
+                                <th class="text-center text-black" scope="col">Valor Pedreiro</th>
+                                <th class="text-center text-black" scope="col">Valor Material</th>
+                                <th class="text-center text-black" scope="col">Valor Projeto Arquiteto</th>
+                                <th class="text-center text-black" scope="col">Valor Total Projeto</th>
+                                <th class="text-center text-black" scope="col">Ações</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -36,8 +36,7 @@
                                     <td class="text-center">@projeto.ValorTotalProjeto.ToString("C2")</td>
                                     <td class="text-center">
                                         <div class="btn-group" role="group">
-                                            <a class="btn btn-primary rounded m-1" asp-controller="Projeto" asp-action="Detalhes" asp-route-id="@projeto.ProjetoId">Detalhes</a>
-                                            <a class="btn btn-outline-danger rounded m-1" asp-controller="Projeto" asp-action="Deletar" asp-route-id="@projeto.ProjetoId">Deletar</a>
+                                            <a class="btn btn-primary rounded m-1" asp-controller="Projeto" asp-action="DetalhesProjeto" asp-route-ProjetoId="@projeto.ProjetoId">Detalhes</a>
                                         </div>
                                     </td>
                                 </tr>
