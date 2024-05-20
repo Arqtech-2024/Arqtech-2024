@@ -11,13 +11,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Arqtech</title>
     <link rel="stylesheet" href="~/assets/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/assets/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/assets/css/Spacelab.css" asp-append-version="true" />
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-success border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Arqtech</a>
+                <a class="navbar-brand text-white" asp-area="" asp-controller="Home" asp-action="Index">Arqtech</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -29,17 +29,17 @@
                             @if (User.IsInRole("Admin"))
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Usuario" asp-action="IndexUsuario">Usuarios</a>
+                                    <a class="nav-link text-white" asp-area="" asp-controller="Usuario" asp-action="IndexUsuario">Usuarios</a>
                                 </li>
                             }
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Material" asp-action="IndexMaterial">Materias</a>
+                                <a class="nav-link text-white" asp-area="" asp-controller="Material" asp-action="IndexMaterial">Materias</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Projeto" asp-action="IndexProjeto">Projetos</a>
+                                <a class="nav-link text-white" asp-area="" asp-controller="Projeto" asp-action="IndexProjeto">Projetos</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Loja" asp-action="IndexLoja">Lojas</a>
+                                <a class="nav-link text-white" asp-area="" asp-controller="Loja" asp-action="IndexLoja">Lojas</a>
                             </li>
                             <li class="nav-item d-flex justify-content-start">
                                 <form asp-area="" asp-controller="Usuario" asp-action="Logout" method="post" class="nav-link">
@@ -74,9 +74,23 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <hr />
+
+    <footer class="border-top footer text-muted bg-success">
         <div class="container">
-            &copy; 2024 - Arqtech - Desenvolvido por Caio Maestrello & Dhiego Arsuffi</a>
+            <div class="row align-items-center" style="height: 100px;">
+                <div class="col-md-6">
+                    <h3 class="text-white">Entre em Contato</h3>
+                    <p class="text-white">
+                        Para mais informações sobre nossos serviços, entre em contato conosco:<br>
+                        Email: <a class="text-white">contato@arqtech.com</a><br>
+                        Telefone: (XX) XXXXX-XXXX
+                    </p>
+                </div>
+                <div class="col-md-6 text-white d-flex align-items-center justify-content-end">
+                    <a>&copy; 2024 - ArqTech_TCC - Desenvolvido por Caio Maestrello e Dhiego Arsuffi.</a>
+                </div>
+            </div>
         </div>
     </footer>
     <script src="~/assets/lib/jquery/dist/jquery.min.js"></script>
