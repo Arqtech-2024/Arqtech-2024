@@ -77,14 +77,31 @@ namespace Arqtech.Controllers
             return View(projeto);
         }
 
-        public async Task<bool> CriarListaMaterial([FromBody] List<CriaListaMaterialViewModel> listaMaterial)
+        [HttpPost]
+        public async Task<bool> CriarListaMaterial([FromBody] List<CriaListaMaterialViewModel> itensMateriais)
         {
-            foreach(var item in listaMaterial)
+            var listaMaterias = new ListaMaterialModel();
+            foreach (var material in itensMateriais)
             {
+                var quantidadeMateriais = itensMateriais.Count;
+                int posicaoIndex = 0;
 
+                if (quantidadeMateriais == posicaoIndex)
+                {
+                    var projeto = await _projetoRepositorio.BuscaProjetoPorId(material.ProjetoId);
+                }
+
+                var materialEncontrado = await _materialRepositorio.BuscaMaterialPorId(material.MaterialId);
+
+                if (materialEncontrado is not null)
+                {
+
+                }
+
+                posicaoIndex++;
             }
 
             return true;
         }
-    }   
+    }
 }
