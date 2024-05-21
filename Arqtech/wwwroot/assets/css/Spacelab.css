@@ -12255,6 +12255,7 @@ textarea.form-control-lg {
   color: inherit;
 }
 
+/*CSS do footer*/
 .footer {
     display: flex !important; /* Sobrescreve display block do user agent stylesheet */
     justify-content: center; /* Centraliza horizontalmente */
