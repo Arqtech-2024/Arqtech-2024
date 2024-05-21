@@ -27,22 +27,31 @@ namespace Arqtech.Controllers
             return View(usuarios);
         }
 
+        public async Task<IActionResult> DetalhesUsuario(string usuarioId)
+        {
+            if (usuarioId is null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                var usuario = await _usuarioRepositorio.BuscaUsuarioPorId(usuarioId);
+
+                if (usuario is not null)
+                {
+                    return View(usuario);
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }
+        }
+
         [HttpGet]
         public IActionResult CriaUsuario()
         {
             return View();
-        }
-
-        public  async Task<IActionResult> DetalhesUsuario(string usuarioId)
-        {
-            var usuario = await _userManager.FindByIdAsync(usuarioId);
-
-            if(usuario is null)
-            {
-                return NotFound();
-            }
-
-            return View(usuario);
         }
 
         [HttpPost]

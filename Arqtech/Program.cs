@@ -10,7 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
 
-var connectionString = builder.Configuration.GetConnectionString("AppDhiego");
+var connectionString = builder.Configuration.GetConnectionString("AppConnection");
 
 builder.Services.AddDbContext<AppDbContext>(opt =>
 {

@@ -10,19 +10,20 @@
         <h1>Lojas:</h1>
         <a class="btn btn-success" asp-action="CriaLoja" asp-controller="Loja">Criar Loja</a>
     </div>
-    
-    @foreach (var loja in Model)
-    {
-        <table class="table table-striped">
-            <tbody>
-                <tr>
-                    <td class="text-center text-black"><strong>Nome:</strong></td>
-                    <td class="text-center text-black"><strong>Descrição:</strong></td>
-                    <td class="text-center text-black"><strong>Logradouro:</strong></td>
-                    <td class="text-center text-black"><strong>Número:</strong></td>
-                    <td class="text-center text-black"><strong>Cidade:</strong></td>
-                    <td class="text-center text-black"><strong>Ações:</strong></td>
-                </tr>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <td class="text-center text-black"><strong>Nome:</strong></td>
+                <td class="text-center text-black"><strong>Descrição:</strong></td>
+                <td class="text-center text-black"><strong>Logradouro:</strong></td>
+                <td class="text-center text-black"><strong>Número:</strong></td>
+                <td class="text-center text-black"><strong>Cidade:</strong></td>
+                <td class="text-center text-black"><strong>Ações:</strong></td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var loja in Model)
+            {
                 <tr>
                     <td class="text-center">@loja.Nome</td>
                     <td class="text-center">@loja.Descricao</td>
@@ -36,7 +37,8 @@
                         </div>
                     </td>
                 </tr>
-            </tbody>
-        </table>
-    }
+            }
+        </tbody>
+    </table>
+
 </div>

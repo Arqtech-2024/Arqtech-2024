@@ -104,7 +104,7 @@ namespace Arqtech.Controllers
 
             if (materialEncontrado is not null)
             {
-                await _materialRepositorio.DeletaMaterial(materialEncontrado.LojaId);
+                await _materialRepositorio.DeletaMaterial(materialEncontrado.MaterialId);
                 return RedirectToAction("IndexMaterial");
             }
 

@@ -33,8 +33,8 @@
                                 <td class="text-center">@material.Loja.Nome</td>
                                 <td class="text-center">
                                     <div class="btn-group" role="group">
-                                        <a class="btn btn-primary rounded m-1" asp-controller="" asp-action="" asp-route-id="@material.MaterialId">Detalhes</a>
-                                        <a class="btn btn-outline-danger rounded m-1" asp-controller="" asp-action="" asp-route-id="@material.MaterialId">Deletar</a>
+                                        <a class="btn btn-primary rounded m-1" asp-controller="Material" asp-action="DetalhesMaterial" asp-route-MaterialId="@material.MaterialId">Detalhes</a>
+                                        <a class="btn btn-outline-danger rounded m-1" asp-controller="Material" asp-action="DeletarMaterial" asp-route-MaterialId="@material.MaterialId">Deletar</a>
                                     </div>
                                 </td>
                             </tr>

@@ -71,5 +71,17 @@ namespace Arqtech.Repositorio
                                  .Include(p => p.Usuario)
                                  .ToListAsync();
         }
+
+        public async Task AtualizaProjeto(ProjetoModel projeto)
+        {
+            _context.Attach(projeto).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task RemoveProjeto(ProjetoModel projeto)
+        {
+            _context.Remove(projeto);
+            await _context.SaveChangesAsync();
+        }
     }
 }

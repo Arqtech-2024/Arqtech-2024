@@ -58,7 +58,7 @@
                 </tbody>
             </table>
             <br />
-            <div class="form-group">
+@*             <div class="form-group">
                 <label for="materialSelect">Selecione um Material:</label>
                 <select id="materialSelect" class="form-control">
                     <option value="">Selecione...</option>
@@ -71,7 +71,7 @@
             <button id="btnAdicionarMaterial" class="btn btn-primary">Adicionar Material</button>
             <ul id="listaMateriais" class="list-group mt-3">
             </ul>
-            <button id="btnEnviarLista" class="btn btn-success mt-3">Enviar Lista</button>
+            <button id="btnEnviarLista" class="btn btn-success mt-3">Enviar Lista</button> *@
             <div class="text-center mt-3">
                 <a asp-action="IndexProjeto" asp-controller="Projeto" class="btn btn-secondary">Voltar para a Lista</a>
             </div>
@@ -116,7 +116,7 @@
                     var valorMaterial = optionValue[1];
                     var projetoId = @Model.ProjetoId;
 
-                    var objeto = { ProjetoId: projetoId,  MaterialId: materialId, Quantidade: parseInt(qtdeMaterial), Preco: valorMaterial };
+                    var objeto = { ProjetoId: projetoId, MaterialId: materialId, Quantidade: parseInt(qtdeMaterial), Preco: valorMaterial };
                     itensMateriais.push(objeto);
 
                     console.log(objeto);

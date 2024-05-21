@@ -3,6 +3,7 @@ using Arqtech.Repositorio;
 using Arqtech.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Build.Execution;
 
 namespace Arqtech.Controllers
 {
@@ -25,8 +26,16 @@ namespace Arqtech.Controllers
 
             if (usuario is not null)
             {
-                var projetos = await _projetoRepositorio.BuscaProjetosPorUsuario(usuario.Id);
-                return View(projetos);
+                if (User.IsInRole("Admin"))
+                {
+                    var projetos = await _projetoRepositorio.BuscaProjetosPorUsuario(usuario.Id);
+                    return View(projetos);
+                }
+                else
+                {
+                    var projetos = await _projetoRepositorio.BuscaProjetosPorUsuario(usuario.Id);
+                    return View(projetos);
+                }
             }
 
             return View();
@@ -102,6 +111,58 @@ namespace Arqtech.Controllers
             }
 
             return true;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditarProjeto(int projetoId)
+        {
+            var projeto = await _projetoRepositorio.BuscaProjetoPorId(projetoId);
+
+            if(projeto is not null)
+            {
+                return View(projeto);
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
+        [HttpPost]  
+        public async Task<IActionResult> EditarProjeto(ProjetoModel projeto)
+        {
+            var usuario = await _userManager.GetUserAsync(User);
+
+            if (projeto is not null)
+            {
+                projeto.Usuario = usuario;
+                projeto.UsuarioId = usuario.Id;
+                await _projetoRepositorio.AtualizaProjeto(projeto);
+
+                return RedirectToAction("IndexProjeto");
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
+        public async Task<IActionResult> DeletarProjeto(int projetoId)
+        {
+            if (projetoId == 0)
+            {
+                return NotFound();
+            }
+
+            var projetoEncontrado = await _projetoRepositorio.BuscaProjetoPorId(projetoId);
+
+            if (projetoEncontrado is not null)
+            {
+                await _projetoRepositorio.RemoveProjeto(projetoEncontrado);
+                return RedirectToAction("IndexProjeto");
+            }
+
+            return View(projetoEncontrado);
         }
     }
 }

@@ -98,5 +98,10 @@ namespace Arqtech.Repositorio
                     throw new NotImplementedException();
             }
         }
+
+        public async Task<UsuarioModel> BuscaUsuarioPorId(string usuarioId)
+        {
+            return await _context.Usuarios.Where(u => u.Id == usuarioId).FirstAsync();
+        }
     }
 }

@@ -63,10 +63,7 @@ namespace Arqtech.Repositorio
 
         public async Task<MaterialModel> BuscaMaterialPorId(int materialId)
         {
-            return await _context.Materiais
-                                 .Where(x => x.MaterialId == materialId)
-                                 .Include(x => x.Loja)
-                                 .FirstAsync();
+            return await _context.Materiais.FirstOrDefaultAsync(x => x.MaterialId == materialId);
         }
 
         public async Task AtualizaMaterial(MaterialModel material)

@@ -29,11 +29,11 @@
                                 <td class="text-center">@usuario.Nome</td>
                                 <td class="text-center">@usuario.Cpf</td>
                                 <td class="text-center">@usuario.DataNascimento.ToShortDateString()</td>
-                                <td class="text-center">@usuario.Email</td>
+                                <td class="text-center">@usuario.UserName</td>
                                 <td class="text-center">@usuario.Cargo</td>
                                 <td class="text-center">
                                     <div class="btn-group" role="group">
-                                        <a class="btn btn-warning rounded m-1" asp-controller="Usuarios" asp-action="DetalhesUsuario" asp-route-UsuarioId="@usuario.Id">Detalhes</a>
+                                        <a class="btn btn-warning rounded m-1" asp-controller="Usuario" asp-action="DetalhesUsuario" asp-route-UsuarioId="@usuario.Id">Detalhes</a>
                                     </div>
                                 </td>
                             </tr>
