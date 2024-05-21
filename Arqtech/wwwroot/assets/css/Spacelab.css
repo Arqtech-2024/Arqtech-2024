@@ -8553,8 +8553,9 @@ textarea.form-control-lg {
 }
 
 .text-white {
-  --bs-text-opacity: 1;
-  color: rgba(var(--bs-white-rgb), var(--bs-text-opacity)) !important;
+    --bs-text-opacity: 1;
+    color: rgba(var(--bs-white-rgb), var(--bs-text-opacity)) !important;
+    font-size: medium;
 }
 
 .text-body {
@@ -12252,4 +12253,7 @@ textarea.form-control-lg {
 .list-group-item h6,
 .list-group-item .h6 {
   color: inherit;
+}
+.border-top footer text-muted bg-success{
+    position: fixed;
 }
