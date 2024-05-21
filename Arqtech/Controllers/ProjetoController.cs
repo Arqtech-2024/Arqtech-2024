@@ -28,7 +28,7 @@ namespace Arqtech.Controllers
             {
                 if (User.IsInRole("Admin"))
                 {
-                    var projetos = await _projetoRepositorio.BuscaProjetosPorUsuario(usuario.Id);
+                    var projetos = await _projetoRepositorio.BuscaTodosProjetos();
                     return View(projetos);
                 }
                 else

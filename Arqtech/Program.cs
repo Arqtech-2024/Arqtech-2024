@@ -10,7 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
 
-var connectionString = builder.Configuration.GetConnectionString("AppDhiego");
+var connectionString = builder.Configuration.GetConnectionString("AppConnection");
 
 builder.Services.AddDbContext<AppDbContext>(opt =>
 {
@@ -58,6 +58,6 @@ void CriarPerfisUsuarios(WebApplication app)
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Usuario}/{action=Login}/{id?}");
 
 app.Run();
