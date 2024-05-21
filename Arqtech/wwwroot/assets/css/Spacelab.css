@@ -12254,6 +12254,125 @@ textarea.form-control-lg {
 .list-group-item .h6 {
   color: inherit;
 }
-.border-top footer text-muted bg-success{
+
+.footer {
+    display: flex !important; /* Sobrescreve display block do user agent stylesheet */
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    height: 60px; /* Define a altura do footer */
+    background-color: #3bb321; /* Cor de fundo do footer */
+    color: #fff; /* Cor do texto do footer */
+    position: fixed; /* Torna o footer fixo */
+    bottom: 0; /* Posiciona o footer na parte inferior */
+    width: 100%; /* Faz o footer ocupar toda a largura da tela */
+    z-index: 1000; /* Garante que o footer fique acima de outros elementos */
+    white-space: nowrap; /* Impede quebra de linha no conteúdo */
+    line-height: 1.5; /* Define a altura da linha */
+}
+
+    .footer .container {
+        display: flex; /* Flex container */
+        justify-content: space-between; /* Espaça os elementos */
+        align-items: center; /* Centraliza verticalmente */
+        height: 100%; /* Ocupa toda a altura do footer */
+    }
+
+    .footer h4, .footer p {
+        margin: 0; /* Remove margem */
+        padding: 0; /* Remove padding */
+    }
+
+    .footer .row {
+        width: 100%; /* Faz a row ocupar toda a largura do container */
+        height: 100%; /* Faz a row ocupar toda a altura do container */
+    }
+
+    .footer .col-md-3, .footer .col-md-6 {
+        display: flex;
+        align-items: center;
+        height: 100%;
+    }
+
+    .footer .col-md-3 {
+        flex: 1;
+    }
+
+    .footer .col-md-6 {
+        justify-content: flex-end;
+    }
+
+
+/*atual footer 
+.footer {
+    display: flex !important;
+    unicode-bidi: isolate !important;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    background-color: red;
+    color: #fff;
     position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 1000;
+    white-space: nowrap;
+    line-height: 60px;
+}*/
+
+/*.footer {
+    display: flex !important;*/ /* Sobrescreve display block do user agent stylesheet */
+    /*unicode-bidi: isolate !important;*/ /* Mantém unicode-bidi como isolate */
+    /*justify-content: center;*/ /* Centraliza horizontalmente */
+    /*align-items: center;*/ /* Centraliza verticalmente */
+    /*height: 200px;*/ /* Define a altura do footer */
+    /*background-color: red;*/ /* Cor de fundo do footer */
+    /*color: #fff;*/ /* Cor do texto do footer */
+    /*position: fixed;*/ /* Torna o footer fixo */
+    /*bottom: 0;*/ /* Posiciona o footer na parte inferior */
+    /*width: 100%;*/ /* Faz o footer ocupar toda a largura da tela */
+    /*z-index: 1000;*/ /* Garante que o footer fique acima de outros elementos */
+    /*white-space: nowrap;*/ /* Impede quebra de linha no conteúdo */
+    /*line-height: 60px;*/ /* Define a altura da linha */
+/*}*/
+
+/*CSS do LOGIN*/
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.login-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-width: 400px;
+    width: 100%;
+}
+
+.card-title {
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/*CSS do Registre-se*/
+.container-fluid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-width: 600px;
+    width: 100%;
 }
