@@ -12,7 +12,7 @@
     <title>@ViewData["Title"] - Arqtech</title>
     <link rel="stylesheet" href="~/assets/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/assets/css/Spacelab.css" asp-append-version="true" />
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.0.1/fullcalendar.min.css" />
 </head>
 <body>
     <header>
@@ -43,6 +43,9 @@
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link text-white" asp-area="" asp-controller="Projeto" asp-action="IndexProjeto">Projetos</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Agenda">Agenda</a>
                                 </li>
                                 <li class="nav-item d-flex justify-content-start">
                                     <form asp-area="" asp-controller="Usuario" asp-action="Logout" method="post" class="nav-link">
@@ -89,15 +92,12 @@
             </div>
         </nav>
     </header>
-    <div class="container">
+    <div class="p-3">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
-
- 
-
-    <footer class="border-top footer text-muted ">
+    <footer class="border-top footer text-muted">
         <div class="container">
             <div class="row align-items-center" style="height: 60px;">
                 @* <div class="col-md-3">
@@ -133,6 +133,9 @@
     <script src="~/assets/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/assets/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/assets/lib/bootstrap/dist/js/site.js" asp-append-version="true"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://fullcalendar.io/js/fullcalendar-2.2.5/fullcalendar.min.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

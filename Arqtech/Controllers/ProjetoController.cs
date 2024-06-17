@@ -1,9 +1,12 @@
 ﻿using Arqtech.Models;
 using Arqtech.Repositorio;
 using Arqtech.ViewModels;
+using iText.Html2pdf;
+using iText.Kernel.Pdf;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Build.Execution;
+using Microsoft.CodeAnalysis;
 
 namespace Arqtech.Controllers
 {
@@ -87,30 +90,44 @@ namespace Arqtech.Controllers
         }
 
         [HttpPost]
-        public async Task<bool> CriarListaMaterial([FromBody] List<CriaListaMaterialViewModel> itensMateriais)
+        public async Task<IActionResult> CriarListaMaterial([FromBody] List<CriaListaMaterialViewModel> itensMateriais)
         {
-            var listaMaterias = new ListaMaterialModel();
-            foreach (var material in itensMateriais)
+            var listaMaterias = new ListaMaterialModel
             {
-                var quantidadeMateriais = itensMateriais.Count;
-                int posicaoIndex = 0;
+                Materiais = new List<MaterialModel>()
+            };
 
-                if (quantidadeMateriais == posicaoIndex)
+            double totalListaMaterial = 0;
+
+            var projeto = await _projetoRepositorio.BuscaProjetoPorId(itensMateriais[0].ProjetoId);
+
+            if (projeto is not null)
+            {
+                for (int i = 0; i < itensMateriais.Count; i++)
                 {
-                    var projeto = await _projetoRepositorio.BuscaProjetoPorId(material.ProjetoId);
+                    double preco = itensMateriais[i].Preco;
+                    int quantidade = itensMateriais[i].Quantidade;
+                    totalListaMaterial += preco * quantidade;
+
+                    var materialEncontrado = await _materialRepositorio.BuscaMaterialPorId(itensMateriais[i].MaterialId);
+
+                    if (materialEncontrado is not null)
+                    {
+                        materialEncontrado.Quantidade = quantidade;
+                        listaMaterias.Materiais.Add(materialEncontrado);
+                    }
                 }
 
-                var materialEncontrado = await _materialRepositorio.BuscaMaterialPorId(material.MaterialId);
+                projeto.ListaMaterial = listaMaterias;
+                projeto.ValorMaterial = totalListaMaterial;
+                projeto.ValorTotalProjeto = projeto.ValorProjetoArquiteto + projeto.ValorPedreiro + projeto.ValorMaterial;
 
-                if (materialEncontrado is not null)
-                {
+                await _projetoRepositorio.AtualizaProjeto(projeto);
 
-                }
-
-                posicaoIndex++;
+                return RedirectToAction("DetalhesProjeto", new { projetoId = projeto.ProjetoId });
             }
 
-            return true;
+            return RedirectToAction("IndexProjeto");
         }
 
         [HttpGet]
@@ -118,7 +135,7 @@ namespace Arqtech.Controllers
         {
             var projeto = await _projetoRepositorio.BuscaProjetoPorId(projetoId);
 
-            if(projeto is not null)
+            if (projeto is not null)
             {
                 return View(projeto);
             }
@@ -128,7 +145,7 @@ namespace Arqtech.Controllers
             }
         }
 
-        [HttpPost]  
+        [HttpPost]
         public async Task<IActionResult> EditarProjeto(ProjetoModel projeto)
         {
             var usuario = await _userManager.GetUserAsync(User);
@@ -163,6 +180,65 @@ namespace Arqtech.Controllers
             }
 
             return View(projetoEncontrado);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UploadImagem(int projetoId, IFormFile file)
+        {
+            if (file != null && file.Length > 0)
+            {
+                var projeto = await _projetoRepositorio.BuscaProjetoPorId(projetoId);
+                if (projeto == null)
+                {
+                    return NotFound();
+                }
+
+                using (var memoryStream = new MemoryStream())
+                {
+                    await file.CopyToAsync(memoryStream);
+                    var fileBytes = memoryStream.ToArray();
+                    var base64String = Convert.ToBase64String(fileBytes);
+                    projeto.ImagemCapa = base64String;
+                }
+
+                await _projetoRepositorio.AtualizaProjeto(projeto);
+
+                return RedirectToAction("DetalhesProjeto", new { projetoId = projetoId });
+            }
+
+            return BadRequest("Arquivo inválido.");
+        }
+
+        public async Task<IActionResult> GerarPdfProjeto(int projetoId)
+        {
+            var projeto = await _projetoRepositorio.BuscaProjetoPorId(projetoId);
+
+            if (projeto == null)
+            {
+                return NotFound();
+            }
+
+            var conteudoHtml = await _projetoRepositorio.RenderizarHtmlEstagio(projeto);
+            var nomePdf = $"{projeto.ProjetoId}-.pdf";
+
+            try
+            {
+                var memoryStream = new MemoryStream();
+                var writer = new PdfWriter(memoryStream);
+                var pdf = new PdfDocument(writer);
+                var converter = new ConverterProperties();
+
+                HtmlConverter.ConvertToPdf(conteudoHtml, pdf, converter);
+
+                pdf.Close();
+
+                return File(memoryStream.ToArray(), "application/pdf", nomePdf);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Erro ao gerar PDF: " + ex.Message);
+                return RedirectToAction("IndexProjeto");
+            }
         }
     }
 }

@@ -8,7 +8,7 @@
         public double ValorMaterial { get; set; }
         public double ValorProjetoArquiteto { get; set; }
         public double ValorTotalProjeto { get; set; }
-
+        public string? ImagemCapa { get; set; }
         public string Logradouro { get; set; }
         public string Numero { get; set; }
         public string Cidade { get; set; }

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Arqtech.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240517023405_add-column-projeto")]
-    partial class addcolumnprojeto
+    [Migration("20240616231523_ajuste-material")]
+    partial class ajustematerial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,35 +25,27 @@ namespace Arqtech.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Arqtech.Models.EtapaModel", b =>
+            modelBuilder.Entity("Arqtech.Models.EventoCalendarioModel", b =>
                 {
-                    b.Property<int>("EtapaId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("DescricaoEtapa")
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime?>("End")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("Start")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("DiasCorridos")
-                        .HasColumnType("int");
+                    b.HasKey("Id");
 
-                    b.Property<int>("MaterialId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("NomeEtapa")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ProjetoId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Quantidade")
-                        .HasColumnType("int");
-
-                    b.HasKey("EtapaId");
-
-                    b.ToTable("Etapas");
+                    b.ToTable("EventoCalendarioModel");
                 });
 
             modelBuilder.Entity("Arqtech.Models.ListaMaterialModel", b =>
@@ -113,9 +105,6 @@ namespace Arqtech.Migrations
                     b.Property<string>("Descricao")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ListaMateriaisListaMaterialId")
-                        .HasColumnType("int");
-
                     b.Property<int>("LojaId")
                         .HasColumnType("int");
 
@@ -126,9 +115,10 @@ namespace Arqtech.Migrations
                     b.Property<double>("Preco")
                         .HasColumnType("float");
 
-                    b.HasKey("MaterialId");
+                    b.Property<int?>("Quantidade")
+                        .HasColumnType("int");
 
-                    b.HasIndex("ListaMateriaisListaMaterialId");
+                    b.HasKey("MaterialId");
 
                     b.HasIndex("LojaId");
 
@@ -143,13 +133,25 @@ namespace Arqtech.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProjetoId"));
 
-                    b.Property<int?>("EtapaId")
-                        .HasColumnType("int");
+                    b.Property<string>("Cidade")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImagemCapa")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("ListaMaterialId")
                         .HasColumnType("int");
 
+                    b.Property<string>("Logradouro")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Numero")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -271,6 +273,21 @@ namespace Arqtech.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+                });
+
+            modelBuilder.Entity("ListaMaterialModelMaterialModel", b =>
+                {
+                    b.Property<int>("ListaMaterialId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MateriaisMaterialId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ListaMaterialId", "MateriaisMaterialId");
+
+                    b.HasIndex("MateriaisMaterialId");
+
+                    b.ToTable("ListaMaterialMaterial", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -406,30 +423,13 @@ namespace Arqtech.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Arqtech.Models.EtapaModel", b =>
-                {
-                    b.HasOne("Arqtech.Models.ProjetoModel", "Projeto")
-                        .WithMany("Etapas")
-                        .HasForeignKey("EtapaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Projeto");
-                });
-
             modelBuilder.Entity("Arqtech.Models.MaterialModel", b =>
                 {
-                    b.HasOne("Arqtech.Models.ListaMaterialModel", "ListaMateriais")
-                        .WithMany("Materiais")
-                        .HasForeignKey("ListaMateriaisListaMaterialId");
-
                     b.HasOne("Arqtech.Models.LojaModel", "Loja")
                         .WithMany("Materiais")
                         .HasForeignKey("LojaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("ListaMateriais");
 
                     b.Navigation("Loja");
                 });
@@ -449,6 +449,21 @@ namespace Arqtech.Migrations
                     b.Navigation("ListaMaterial");
 
                     b.Navigation("Usuario");
+                });
+
+            modelBuilder.Entity("ListaMaterialModelMaterialModel", b =>
+                {
+                    b.HasOne("Arqtech.Models.ListaMaterialModel", null)
+                        .WithMany()
+                        .HasForeignKey("ListaMaterialId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Arqtech.Models.MaterialModel", null)
+                        .WithMany()
+                        .HasForeignKey("MateriaisMaterialId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -502,19 +517,9 @@ namespace Arqtech.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Arqtech.Models.ListaMaterialModel", b =>
-                {
-                    b.Navigation("Materiais");
-                });
-
             modelBuilder.Entity("Arqtech.Models.LojaModel", b =>
                 {
                     b.Navigation("Materiais");
-                });
-
-            modelBuilder.Entity("Arqtech.Models.ProjetoModel", b =>
-                {
-                    b.Navigation("Etapas");
                 });
 
             modelBuilder.Entity("Arqtech.Models.UsuarioModel", b =>

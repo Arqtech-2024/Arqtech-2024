@@ -19,6 +19,11 @@ namespace Arqtech.Data.ConfiguracaoModelos
                 .HasOne(p => p.Usuario)
                 .WithMany(u => u.Projetos)
                 .HasForeignKey(p => p.UsuarioId);
+
+            builder
+                .HasOne(p => p.ListaMaterial)
+                .WithMany()
+                .HasForeignKey(p => p.ListaMaterialId);
         }
     }
 }

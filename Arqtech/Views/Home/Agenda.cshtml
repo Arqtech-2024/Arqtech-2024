@@ -1,0 +1,124 @@
+﻿@{
+    ViewBag.Title = "Agenda";
+}
+
+<button id="btnAdicionarEvento" type="button" class="btn btn-primary" data-toggle="modal" data-target="#addEventModal">
+    Adicionar Evento
+</button>
+
+<div class="modal fade" id="addEventModal" tabindex="-1" role="dialog" aria-labelledby="addEventModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addEventModalLabel">Adicionar Evento</h5>
+                <button id="btnFecharModal" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="addEventForm">
+                    <div class="form-group">
+                        <label for="eventTitle">Título</label>
+                        <input type="text" class="form-control" id="eventTitle" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="eventStart">Início</label>
+                        <input type="datetime-local" class="form-control" id="eventStart" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="eventEnd">Fim</label>
+                        <input type="datetime-local" class="form-control" id="eventEnd">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="p-3" id="calendar"></div>
+@section Scripts
+{
+    <script>
+        $(document).ready(function () {
+            $('#calendar').fullCalendar({
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,agendaWeek,agendaDay'
+                },
+                defaultDate: new Date().toISOString().slice(0, 10),
+                defaultView: 'month',
+                editable: true,
+                events: function (start, end, timezone, callback) {
+                    $.ajax({
+                        url: '@Url.Action("GetEvents", "Home")',
+                        type: 'GET',
+                        success: function (data) {
+                            var events = [];
+                            $(data).each(function () {
+                                events.push({
+                                    id: this.id,
+                                    title: this.title,
+                                    start: this.start,
+                                    end: this.end
+                                });
+                            });
+                            callback(events);
+                        }
+                    });
+                },
+                eventRender: function (event, element) {
+                    element.append("<span class='closeon' style='cursor:pointer; color:red;'>X</span>");
+                    element.find(".closeon").on('click', function () {
+                        if (confirm("Você tem certeza que deseja excluir este evento?")) {
+                            $.ajax({
+                                url: '@Url.Action("ExcluirEvento", "Home")',
+                                type: 'POST',
+                                data: { id: event.id },
+                                success: function (response) {
+                                    $('#calendar').fullCalendar('removeEvents', event.id);
+                                },
+                                error: function () {
+                                    alert('Erro ao excluir evento');
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+
+            $("#btnAdicionarEvento").click(function () {
+                $("#addEventModal").modal("show");
+            });
+
+            $("#btnFecharModal").click(function () {
+                $("#addEventModal").modal("hide");
+            });
+
+            $('#addEventForm').submit(function (e) {
+                e.preventDefault();
+
+                var title = $('#eventTitle').val();
+                var start = $('#eventStart').val();
+                var end = $('#eventEnd').val();
+
+                $.ajax({
+                    url: '@Url.Action("AdicionarEvento", "Home")',
+                    type: 'POST',
+                    data: {
+                        title: title,
+                        start: start,
+                        end: end
+                    },
+                    success: function (response) {
+                        $('#calendar').fullCalendar('refetchEvents');
+                        $('#addEventModal').modal('hide');
+                    },
+                    error: function () {
+                        alert('Erro ao adicionar evento');
+                    }
+                });
+            });
+        });
+    </script>
+}

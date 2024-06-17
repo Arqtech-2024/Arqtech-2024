@@ -14,6 +14,7 @@ namespace Arqtech.Data
         public DbSet<UsuarioModel> Usuarios { get; set; }
         public DbSet<MaterialModel> Materiais { get; set; }
         public DbSet<ListaMaterialModel> ListaDeMateriais { get; set; }
+        public DbSet<EventoCalendarioModel> EventoCalendarioModel { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -24,6 +25,7 @@ namespace Arqtech.Data
             modelBuilder.ApplyConfiguration(new ConfiguracaoUsuario());
             modelBuilder.ApplyConfiguration(new ConfiguracaoMaterial());
             modelBuilder.ApplyConfiguration(new ConfiguracaoListaMaterial());
+            modelBuilder.ApplyConfiguration(new ConfiguracaoEventoCalendario());
         }
     }
 }

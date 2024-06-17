@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Arqtech.Migrations
 {
     /// <inheritdoc />
-    public partial class bancocompleto : Migration
+    public partial class geral : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -63,7 +63,8 @@ namespace Arqtech.Migrations
                 columns: table => new
                 {
                     ListaMaterialId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1")
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Quantidade = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -199,13 +200,18 @@ namespace Arqtech.Migrations
                 {
                     ProjetoId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ValorPedreiro = table.Column<double>(type: "float", nullable: false),
                     ValorMaterial = table.Column<double>(type: "float", nullable: false),
                     ValorProjetoArquiteto = table.Column<double>(type: "float", nullable: false),
                     ValorTotalProjeto = table.Column<double>(type: "float", nullable: false),
-                    ListaMaterialId = table.Column<int>(type: "int", nullable: false),
-                    UsuarioId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    EtapaId = table.Column<int>(type: "int", nullable: false)
+                    Quantidade = table.Column<int>(type: "int", nullable: false),
+                    ImagemCapa = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Logradouro = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Numero = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Cidade = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ListaMaterialId = table.Column<int>(type: "int", nullable: true),
+                    UsuarioId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -220,8 +226,7 @@ namespace Arqtech.Migrations
                         name: "FK_Projetos_ListaDeMateriais_ListaMaterialId",
                         column: x => x.ListaMaterialId,
                         principalTable: "ListaDeMateriais",
-                        principalColumn: "ListaMaterialId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "ListaMaterialId");
                 });
 
             migrationBuilder.CreateTable(
@@ -233,17 +238,11 @@ namespace Arqtech.Migrations
                     Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Preco = table.Column<double>(type: "float", nullable: false),
                     Descricao = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LojaId = table.Column<int>(type: "int", nullable: false),
-                    ListaMateriaisListaMaterialId = table.Column<int>(type: "int", nullable: true)
+                    LojaId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Materiais", x => x.MaterialId);
-                    table.ForeignKey(
-                        name: "FK_Materiais_ListaDeMateriais_ListaMateriaisListaMaterialId",
-                        column: x => x.ListaMateriaisListaMaterialId,
-                        principalTable: "ListaDeMateriais",
-                        principalColumn: "ListaMaterialId");
                     table.ForeignKey(
                         name: "FK_Materiais_Lojas_LojaId",
                         column: x => x.LojaId,
@@ -253,25 +252,26 @@ namespace Arqtech.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Etapas",
+                name: "ListaMaterialMaterial",
                 columns: table => new
                 {
-                    EtapaId = table.Column<int>(type: "int", nullable: false),
-                    MaterialId = table.Column<int>(type: "int", nullable: false),
-                    Quantidade = table.Column<int>(type: "int", nullable: false),
-                    NomeEtapa = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DescricaoEtapa = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DiasCorridos = table.Column<int>(type: "int", nullable: false),
-                    ProjetoId = table.Column<int>(type: "int", nullable: false)
+                    ListaMaterialId = table.Column<int>(type: "int", nullable: false),
+                    MateriaisMaterialId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Etapas", x => x.EtapaId);
+                    table.PrimaryKey("PK_ListaMaterialMaterial", x => new { x.ListaMaterialId, x.MateriaisMaterialId });
                     table.ForeignKey(
-                        name: "FK_Etapas_Projetos_EtapaId",
-                        column: x => x.EtapaId,
-                        principalTable: "Projetos",
-                        principalColumn: "ProjetoId",
+                        name: "FK_ListaMaterialMaterial_ListaDeMateriais_ListaMaterialId",
+                        column: x => x.ListaMaterialId,
+                        principalTable: "ListaDeMateriais",
+                        principalColumn: "ListaMaterialId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ListaMaterialMaterial_Materiais_MateriaisMaterialId",
+                        column: x => x.MateriaisMaterialId,
+                        principalTable: "Materiais",
+                        principalColumn: "MaterialId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -321,9 +321,9 @@ namespace Arqtech.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Materiais_ListaMateriaisListaMaterialId",
-                table: "Materiais",
-                column: "ListaMateriaisListaMaterialId");
+                name: "IX_ListaMaterialMaterial_MateriaisMaterialId",
+                table: "ListaMaterialMaterial",
+                column: "MateriaisMaterialId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Materiais_LojaId",
@@ -360,25 +360,25 @@ namespace Arqtech.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Etapas");
-
-            migrationBuilder.DropTable(
-                name: "Materiais");
-
-            migrationBuilder.DropTable(
-                name: "AspNetRoles");
+                name: "ListaMaterialMaterial");
 
             migrationBuilder.DropTable(
                 name: "Projetos");
 
             migrationBuilder.DropTable(
-                name: "Lojas");
+                name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "Materiais");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
                 name: "ListaDeMateriais");
+
+            migrationBuilder.DropTable(
+                name: "Lojas");
         }
     }
 }

@@ -14,6 +14,11 @@ namespace Arqtech.Data.ConfiguracaoModelos
             builder
                 .Property(m => m.MaterialId)
                 .ValueGeneratedOnAdd();
+
+            builder
+                .HasMany(m => m.listaMaterial)
+                .WithMany(lm => lm.Materiais)
+                .UsingEntity(j => j.ToTable("ListaMaterialMaterial"));
         }
     }
 }

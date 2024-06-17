@@ -1,0 +1,174 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalhes do Projeto</title>
+    <style>
+        body {
+            font-family: 'Arial', 'Arial Narrow', 'Franklin Gothic Medium', sans-serif;
+            background-color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 20px;
+            border: 2px solid #000;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #000;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        h6 {
+            margin: 5px 0;
+        }
+
+        p {
+            color: #000;
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+        .texto-projeto {
+            margin-bottom: 20px;
+        }
+
+        .assinaturas {
+            margin-top: 40px;
+            text-align: center;
+        }
+
+            .assinaturas p {
+                margin-bottom: 5px;
+                color: #000;
+            }
+
+                .assinaturas p strong {
+                    font-weight: bold;
+                }
+
+        .linha-assinatura {
+            border-top: 1px solid #000;
+            margin-top: 20px;
+            opacity: 20%;
+        }
+
+        .img-thumbnail {
+            display: inline-block;
+            max-width: 100%;
+            height: auto;
+            padding: 4px;
+            background-color: #fff;
+            -webkit-transition: all .2s ease-in-out;
+            -o-transition: all .2s ease-in-out;
+            transition: all .2s ease-in-out;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+            .header img {
+                width: 10rem;
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+        .table {
+            width: 100%;
+            margin-bottom: 1rem;
+            color: #212529;
+            border-collapse: collapse;
+        }
+
+            .table th,
+            .table td {
+                padding: 0.75rem;
+                vertical-align: top;
+                border-top: 1px solid #dee2e6;
+            }
+
+            .table thead th {
+                vertical-align: bottom;
+                border-bottom: 2px solid #dee2e6;
+            }
+
+            .table tbody + tbody {
+                border-top: 2px solid #dee2e6;
+            }
+
+            .table .table {
+                background-color: #fff;
+            }
+
+        .table-bordered {
+            border: 1px solid #dee2e6;
+        }
+
+            .table-bordered th,
+            .table-bordered td {
+                border: 1px solid #dee2e6;
+            }
+
+            .table-bordered thead th,
+            .table-bordered thead td {
+                border-bottom-width: 2px;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="./wwwroot/assets/img/unifaat/logo-unifaat.png" alt="Logo da Universidade" />
+            <h2>Detalhes do Projeto</h2>
+        </div>
+        <div class="texto-projeto">
+            <h6>Identificador do Projeto: {{ProjetoId}}</h6>
+            <h6>Nome do Projeto: <strong>{{Nome}}</strong></h6>
+            <h6>Localização: <strong>{{Logradouro}}, {{Numero}}, {{Cidade}}</strong></h6>
+            <h6>Responsável: <strong>{{Usuario.Nome}}</strong></h6>
+        </div>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Descrição</th>
+                    <th>Valor (R$)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Valor do Pedreiro</td>
+                    <td>{{ValorPedreiro}}</td>
+                </tr>
+                <tr>
+                    <td>Valor do Material</td>
+                    <td>{{ValorMaterial}}</td>
+                </tr>
+                <tr>
+                    <td>Valor do Projeto do Arquiteto</td>
+                    <td>{{ValorProjetoArquiteto}}</td>
+                </tr>
+                <tr>
+                    <td><strong>Valor Total do Projeto</strong></td>
+                    <td><strong>{{ValorTotalProjeto}}</strong></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="assinaturas">
+            <img src="" alt="Assinatura do responsável" />
+            <p><strong>{{Usuario.Nome}}</strong></p>
+            <p><strong>{{Usuario.CPF}}</strong></p>
+        </div>
+    </div>
+</body>
+</html>
