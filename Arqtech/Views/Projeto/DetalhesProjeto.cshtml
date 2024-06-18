@@ -3,159 +3,142 @@
 @{
     ViewData["Title"] = "Detalhes";
 }
-
-<div class="container-fluid">
+<div class="content-center">
     <div class="row">
-        <div class="col">
-            <div class="card">
-                <div class="card-body">
-                    @if (string.IsNullOrEmpty(Model.ImagemCapa))
-                    {
-                        <h2 class="card-title">Upload de Imagem</h2>
-                    }
-                    else
-                    {
-                        <h3 class="card-title">Capa do projeto</h3>
-                        <img class="img-thumbnail mt-3" src="data:image/png;base64,@Model.ImagemCapa" alt="Imagem do Projeto" />
-                        <h2 class="card-title mt-3">Atualizar Imagem</h2>
-                    }
+        <div class="card m-5">
+            <div class="card-body">
+                @if (string.IsNullOrEmpty(Model.ImagemCapa))
+                {
+                    <h2 class="card-title">Upload de Imagem</h2>
+                }
+                else
+                {
+                    <h3 class="card-title">Capa do projeto</h3>
+                    <img class="img-thumbnail mt-3" src="data:image/png;base64,@Model.ImagemCapa" alt="Imagem do Projeto" />
+                    <h2 class="card-title mt-3">Atualizar Imagem</h2>
+                }
 
-                    @using (Html.BeginForm("UploadImagem", "Projeto", FormMethod.Post, new { enctype = "multipart/form-data" }))
-                    {
-                        <input type="hidden" name="projetoId" value="@Model.ProjetoId" />
-                        <div class="form-group">
-                            <label for="file">Escolha uma imagem:</label>
-                            <input type="file" name="file" id="file" class="form-control" />
-                        </div>
-                        <input type="submit" value="Upload" class="btn btn-primary mt-2" />
-                    }
-                </div>
+                @using (Html.BeginForm("UploadImagem", "Projeto", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    <input type="hidden" name="projetoId" value="@Model.ProjetoId" />
+                    <div class="form-group">
+                        <label for="file">Escolha uma imagem:</label>
+                        <input type="file" name="file" id="file" class="form-control" />
+                    </div>
+                    <input type="submit" value="Upload" class="btn btn-primary mt-2" />
+                }
             </div>
         </div>
-        <br />
-        <div class="col">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title text-center">Projeto</h4>
-                    <table class="table table-striped">
-                        <tbody>
-                            <tr>
-                                <th scope="row" class="col-sm-5">Id do Projeto:</th>
-                                <td class="col-sm-7">@Model.ProjetoId</td>
-                            </tr>
-                            <tr>
-                                <th scope="row" class="col-sm-5">Nome do projeto:</th>
-                                <td class="col-sm-7">@Model.Nome</td>
-                            </tr>
-                            <tr>
-                                <th scope="row" class="col-sm-5">Logradouro:</th>
-                                <td class="col-sm-7">@Model.Logradouro</td>
-                            </tr>
-                            <tr>
-                                <th scope="row" class="col-sm-5">Cidade:</th>
-                                <td class="col-sm-7">@Model.Cidade</td>
-                            </tr>
-                            <tr>
-                                <th scope="row" class="col-sm-5">Numero:</th>
-                                <td class="col-sm-7">@Model.Numero</td>
-                            </tr>
-                            <tr>
-                                <th scope="row" class="col-sm-5">Valor Mão de Obra:</th>
-                                <td class="col-sm-7">@Model.ValorPedreiro.ToString("C")</td>
-                            </tr>
-                            <tr>
-                                <th scope="row" class="col-sm-5">Valor do Material:</th>
-                                <td class="col-sm-7">@Model.ValorMaterial.ToString("C")</td>
-                            </tr>
-                            <tr>
-                                <th scope="row" class="col-sm-5">Valor do Projeto Arquiteto:</th>
-                                <td class="col-sm-7">@Model.ValorProjetoArquiteto.ToString("C")</td>
-                            </tr>
-                            <tr>
-                                <th scope="row" class="col-sm-5">Valor Total do Projeto:</th>
-                                <td class="col-sm-7">@Model.ValorTotalProjeto.ToString("C")</td>
-                            </tr>
-                            <tr>
-                                <th scope="row" class="col-sm-5">Usuário:</th>
-                                <td class="col-sm-7">@Model.Usuario.Nome</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="text-center mt-3">
-                        <a asp-action="IndexProjeto" asp-controller="Projeto" class="btn btn-secondary">Voltar para a Lista</a>
-                        <a class="btn btn-outline-danger" asp-controller="Projeto" asp-action="GerarPdfProjeto" asp-route-projetoId="@Model.ProjetoId">Gerar PDF</a>
-                    </div>
+        <div class="card m-5">
+            <div class="card-body">
+                <h4 class="card-title text-center">Projeto</h4>
+                <table class="table table-striped">
+                    <tbody>
+                        <tr>
+                            <th scope="row" class="col-sm-5">Id do Projeto:</th>
+                            <td class="col-sm-7">@Model.ProjetoId</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="col-sm-5">Nome do projeto:</th>
+                            <td class="col-sm-7">@Model.Nome</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="col-sm-5">Logradouro:</th>
+                            <td class="col-sm-7">@Model.Logradouro</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="col-sm-5">Cidade:</th>
+                            <td class="col-sm-7">@Model.Cidade</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="col-sm-5">Numero:</th>
+                            <td class="col-sm-7">@Model.Numero</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="col-sm-5">Valor Mão de Obra:</th>
+                            <td class="col-sm-7">@Model.ValorPedreiro.ToString("C")</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="col-sm-5">Valor do Material:</th>
+                            <td class="col-sm-7">@Model.ValorMaterial.ToString("C")</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="col-sm-5">Valor do Projeto Arquiteto:</th>
+                            <td class="col-sm-7">@Model.ValorProjetoArquiteto.ToString("C")</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="col-sm-5">Valor Total do Projeto:</th>
+                            <td class="col-sm-7">@Model.ValorTotalProjeto.ToString("C")</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="col-sm-5">Usuário:</th>
+                            <td class="col-sm-7">@Model.Usuario.Nome</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="text-center mt-3">
+                    <a asp-action="IndexProjeto" asp-controller="Projeto" class="btn btn-secondary">Voltar para a Lista</a>
+                    <a class="btn btn-outline-danger" asp-controller="Projeto" asp-action="GerarPdfProjeto" asp-route-projetoId="@Model.ProjetoId">Gerar PDF</a>
                 </div>
             </div>
         </div>
 
         @if (Model.ListaMaterial is not null)
         {
-            <div class="col">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title text-center">Lista de Materiais</h4>
-                        <table class="table table-striped">
-                            <thead>
+            <div class="card m-5">
+                <div class="card-body">
+                    <h4 class="card-title text-center">Lista de Materiais</h4>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Nome do Material</th>
+                                <th scope="col">Preço</th>
+                                <th scope="col">Descrição</th>
+                                <th scope="col">Loja</th>
+                                <th scope="col">Quantidade</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var material in Model.ListaMaterial.Materiais)
+                            {
                                 <tr>
-                                    <th scope="col">Nome do Material</th>
-                                    <th scope="col">Preço</th>
-                                    <th scope="col">Descrição</th>
-                                    <th scope="col">Loja</th>
-                                    <th scope="col">Quantidade</th>
+                                    <td>@material.Nome</td>
+                                    <td>@material.Preco.ToString("C")</td>
+                                    <td>@material.Descricao</td>
+                                    <td>@material.Loja.Nome</td>
+                                    <td>@material.Quantidade</td>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var material in Model.ListaMaterial.Materiais)
-                                {
-                                    <tr>
-                                        <td>@material.Nome</td>
-                                        <td>@material.Preco.ToString("C")</td>
-                                        <td>@material.Descricao</td>
-                                        <td>@material.Loja.Nome</td>
-                                        <td>@material.Quantidade</td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
-                    </div>
+                            }
+                        </tbody>
+                    </table>
                 </div>
             </div>
-
         }
         else
         {
-            <div class="col">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title">Lista de Materiais</h4>
-                        <div class="form-group">
-                            <label for="materialSelect">Selecione um Material:</label>
-                            <select id="materialSelect" class="form-control">
-                                <option value="">Selecione...</option>
-                                @foreach (var material in ViewBag.Materiais)
-                                {
-                                    <option value="@material.MaterialId;@material.Preco">@material.Nome</option>
-                                }
-                            </select>
-                        </div>
-                        <br>
-                        <button id="btnAdicionarMaterial" class="btn btn-primary">Adicionar Material</button>
-                        <ul id="listaMateriais" class="list-group mt-3">
-                        </ul>
-                        <button id="btnEnviarLista" class="btn btn-success mt-3">Enviar Lista</button>
+            <div class="card m-4">
+                <div class="card-body">
+                    <h4 class="card-title">Lista de Materiais</h4>
+                    <div class="form-group">
+                        <label for="materialSelect">Selecione um Material:</label>
+                        <select id="materialSelect" class="form-control">
+                            <option value="">Selecione...</option>
+                            @foreach (var material in ViewBag.Materiais)
+                            {
+                                <option value="@material.MaterialId;@material.Preco">@material.Nome</option>
+                            }
+                        </select>
                     </div>
+                    <br>
+                    <button id="btnAdicionarMaterial" class="btn btn-primary">Adicionar Material</button>
+                    <ul id="listaMateriais" class="list-group mt-3">
+                    </ul>
+                    <button id="btnEnviarLista" class="btn btn-success mt-3">Enviar Lista</button>
                 </div>
             </div>
         }
-
-
     </div>
 </div>
-<br />
-<br />
-<br />
-<br />
 
 @section Scripts {
     <script>
@@ -177,13 +160,13 @@
                     materiaisSelecionados.push(materialId);
 
                     $("#listaMateriais").append(`
-                                    <li class="list-group-item">
-                                        ${materialNome}
-                                        <input onchange="calculaTotal(${materialId}, ${valorMaterial})" type="number" id="item-material-${materialId}" value=""/>
-                                        <p id="totalMaterial-${materialId}"></p>
-                                        <input type="hidden" id="valor-material-${materialId}" value="${valorMaterial}"/>
-                                    </li>
-                                `);
+                                                                                                                            <li class="list-group-item">
+                                                                                                                                ${materialNome}
+                                                                                                                                <input onchange="calculaTotal(${materialId}, ${valorMaterial})" type="number" id="item-material-${materialId}" value=""/>
+                                                                                                                                <p id="totalMaterial-${materialId}"></p>
+                                                                                                                                <input type="hidden" id="valor-material-${materialId}" value="${valorMaterial}"/>
+                                                                                                                            </li>
+                                                                                                                        `);
                 }
             });
 
@@ -214,5 +197,4 @@
             });
         });
     </script>
-
 }

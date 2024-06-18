@@ -4,6 +4,7 @@ using Arqtech.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Arqtech.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240618022537_Inserindo-imagens-projeto")]
+    partial class Inserindoimagensprojeto
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,7 +45,7 @@ namespace Arqtech.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("EventoCalendarioModel", (string)null);
+                    b.ToTable("EventoCalendarioModel");
                 });
 
             modelBuilder.Entity("Arqtech.Models.ImagemProjetoModel", b =>
@@ -63,7 +66,7 @@ namespace Arqtech.Migrations
 
                     b.HasIndex("ProjetoId");
 
-                    b.ToTable("ImagensProjetos", (string)null);
+                    b.ToTable("ImagensProjetos");
                 });
 
             modelBuilder.Entity("Arqtech.Models.ListaMaterialModel", b =>
@@ -76,7 +79,7 @@ namespace Arqtech.Migrations
 
                     b.HasKey("ListaMaterialId");
 
-                    b.ToTable("ListaDeMateriais", (string)null);
+                    b.ToTable("ListaDeMateriais");
                 });
 
             modelBuilder.Entity("Arqtech.Models.LojaModel", b =>
@@ -109,7 +112,7 @@ namespace Arqtech.Migrations
 
                     b.HasKey("LojaId");
 
-                    b.ToTable("Lojas", (string)null);
+                    b.ToTable("Lojas");
                 });
 
             modelBuilder.Entity("Arqtech.Models.MaterialModel", b =>
@@ -140,7 +143,7 @@ namespace Arqtech.Migrations
 
                     b.HasIndex("LojaId");
 
-                    b.ToTable("Materiais", (string)null);
+                    b.ToTable("Materiais");
                 });
 
             modelBuilder.Entity("Arqtech.Models.ProjetoModel", b =>
@@ -198,7 +201,7 @@ namespace Arqtech.Migrations
 
                     b.HasIndex("UsuarioId");
 
-                    b.ToTable("Projetos", (string)null);
+                    b.ToTable("Projetos");
                 });
 
             modelBuilder.Entity("Arqtech.Models.UsuarioModel", b =>

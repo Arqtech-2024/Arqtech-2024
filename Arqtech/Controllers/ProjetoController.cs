@@ -183,6 +183,43 @@ namespace Arqtech.Controllers
         }
 
         [HttpPost]
+        public async Task<IActionResult> UploadImagensProjeto(int projetoId, List<IFormFile> files)
+        {
+            if (files != null && files.Count > 0)
+            {
+                var projeto = await _projetoRepositorio.BuscaProjetoPorId(projetoId);
+                if (projeto == null)
+                {
+                    return NotFound();
+                }
+
+                foreach (var file in files)
+                {
+                    if (file.Length > 0)
+                    {
+                        using (var memoryStream = new MemoryStream())
+                        {
+                            await file.CopyToAsync(memoryStream);
+                            var fileBytes = memoryStream.ToArray();
+                            var base64String = Convert.ToBase64String(fileBytes);
+                            var imagemProjeto = new ImagemProjetoModel
+                            {
+                                Imagem = base64String,
+                                ProjetoId = projetoId
+                            };
+                            await _projetoRepositorio.AdicionaImagemProjeto(imagemProjeto);
+                        }
+                    }
+                }
+
+                return RedirectToAction("DetalhesProjeto", new { ProjetoId = projetoId });
+            }
+
+            return BadRequest("Arquivo(s) inválido(s).");
+        }
+
+
+        [HttpPost]
         public async Task<IActionResult> UploadImagem(int projetoId, IFormFile file)
         {
             if (file != null && file.Length > 0)

@@ -54,6 +54,7 @@ namespace Arqtech.Repositorio
             return await _context.Projetos
                                  .Where(p => p.ProjetoId == projetoId)
                                  .Include(p => p.Usuario)
+                                 .Include(p => p.ImagemProjeto)
                                  .Include(p => p.ListaMaterial)
                                  .ThenInclude(p => p.Materiais)
                                  .FirstAsync();
@@ -104,5 +105,12 @@ namespace Arqtech.Repositorio
             conteudoHtml = conteudoHtml.Replace("{{Usuario.CPF}}", projeto.Usuario.Cpf);
             return conteudoHtml;
         }
+
+        public async Task AdicionaImagemProjeto(ImagemProjetoModel imagemProjeto)
+        {
+            await _context.ImagensProjetos.AddAsync(imagemProjeto);
+            await _context.SaveChangesAsync();
+        }
+
     }
 }

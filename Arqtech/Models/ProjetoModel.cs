@@ -18,5 +18,8 @@
 
         public string UsuarioId { get; set; }
         public virtual UsuarioModel Usuario { get; set; }
+
+        public int ImagemProjetoId { get; set; }
+        public virtual List<ImagemProjetoModel>? ImagemProjeto { get; set; }
     }
 }
