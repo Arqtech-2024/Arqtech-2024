@@ -10,15 +10,15 @@
         <h1>Lojas</h1>
         <a class="btn btn-success" asp-action="CriaLoja" asp-controller="Loja">Criar Loja</a>
     </div>
-    <table class="table table-striped">
+    <table class="table table-bordered table-striped">
         <thead>
             <tr>
-                <td class="text-center text-black"><strong>Nome:</strong></td>
-                <td class="text-center text-black"><strong>Descrição:</strong></td>
-                <td class="text-center text-black"><strong>Logradouro:</strong></td>
-                <td class="text-center text-black"><strong>Número:</strong></td>
-                <td class="text-center text-black"><strong>Cidade:</strong></td>
-                <td class="text-center text-black"><strong>Ações:</strong></td>
+                <td class="text-center text-black"><strong>Nome</strong></td>
+                <td class="text-center text-black"><strong>Descrição</strong></td>
+                <td class="text-center text-black"><strong>Logradouro</strong></td>
+                <td class="text-center text-black"><strong>Número</strong></td>
+                <td class="text-center text-black"><strong>Cidade</strong></td>
+                <td></td>
             </tr>
         </thead>
         <tbody>
@@ -32,8 +32,8 @@
                     <td class="text-center">@loja.Cidade</td>
                     <td class="text-center">
                         <div class="btn-group" role="group">
-                            <a class="btn btn-outline-secondary rounded m-1" asp-controller="Loja" asp-action="EditarLoja" asp-route-LojaId="@loja.LojaId">Editar</a>
-                            <a class="btn btn-outline-danger rounded m-1" asp-controller="Loja" asp-action="DeletarLoja" asp-route-LojaId="@loja.LojaId">Deletar</a>
+                            <a class="btn btn-outline-secondary rounded m-1" asp-controller="Loja" asp-action="EditarLoja" asp-route-LojaId="@loja.LojaId"><i class="bi bi-pencil-square"></i></a>
+                            <a class="btn btn-outline-danger rounded m-1" asp-controller="Loja" asp-action="DeletarLoja" asp-route-LojaId="@loja.LojaId"><i class="bi bi-trash"></i></a>
                         </div>
                     </td>
                 </tr>
