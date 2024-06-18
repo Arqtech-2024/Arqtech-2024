@@ -32,9 +32,9 @@
                             <p class="card-text"><strong>Valor Material:</strong> @projeto.ValorMaterial.ToString("C2")</p>
                             <p class="card-text"><strong>Valor Total:</strong> @projeto.ValorTotalProjeto.ToString("C2")</p>
                             <div class="btn-group" role="group">
-                                <a class="btn btn-primary text-center" asp-controller="Projeto" asp-action="DetalhesProjeto" asp-route-projetoId="@projeto.ProjetoId">Detalhes</a>
-                                <a class="btn btn-secondary text-center" asp-controller="Projeto" asp-action="EditarProjeto" asp-route-projetoId="@projeto.ProjetoId">Editar</a>
-                                <a class="btn btn-danger text-center" asp-controller="Projeto" asp-action="DeletarProjeto" asp-route-projetoId="@projeto.ProjetoId">Deletar</a>
+                                <a class="btn btn-primary rounded m-1" asp-controller="Projeto" asp-action="DetalhesProjeto" asp-route-ProjetoId="@projeto.ProjetoId"><i class="bi bi-eye"></i></a>
+                                <a class="btn btn-secondary rounded m-1" asp-controller="Projeto" asp-action="EditarProjeto" asp-route-ProjetoId="@projeto.ProjetoId"><i class="bi bi-pencil-square"></i></a>
+                                <a class="btn btn-danger rounded m-1" asp-controller="Projeto" asp-action="DeletarProjeto" asp-route-ProjetoId="@projeto.ProjetoId"><i class="bi bi-trash"></i></a>
                             </div>
                         </div>
                     </div>
