@@ -5,7 +5,7 @@
 }
 
     <div class="p-3 mb-3">
-        <h3 class="mb-3 text-center" style="color: black">Projetos</h3>
+        <h2 class="mb-3 text-center" style="color: black">Projetos</h2>
     </div>
 <div class="container-fluid">
     <div class="row justify-content-center">
@@ -36,9 +36,9 @@
                                     <td class="text-center">@projeto.ValorTotalProjeto.ToString("C2")</td>
                                     <td class="text-center">
                                         <div class="btn-group" role="group">
-                                            <a class="btn btn-primary rounded m-1" asp-controller="Projeto" asp-action="DetalhesProjeto" asp-route-ProjetoId="@projeto.ProjetoId">Detalhes</a>
-                                            <a class="btn btn-primary rounded m-1" asp-controller="Projeto" asp-action="EditarProjeto" asp-route-ProjetoId="@projeto.ProjetoId">Editar</a>
-                                            <a class="btn btn-primary rounded m-1" asp-controller="Projeto" asp-action="DeletarProjeto" asp-route-ProjetoId="@projeto.ProjetoId">Deletar</a>
+                                            <a class="btn btn-primary rounded m-1" asp-controller="Projeto" asp-action="DetalhesProjeto" asp-route-ProjetoId="@projeto.ProjetoId"><i class="bi bi-eye"></i></a>
+                                            <a class="btn btn-secondary rounded m-1" asp-controller="Projeto" asp-action="EditarProjeto" asp-route-ProjetoId="@projeto.ProjetoId"><i class="bi bi-pencil-square"></i></a>
+                                            <a class="btn btn-danger rounded m-1" asp-controller="Projeto" asp-action="DeletarProjeto" asp-route-ProjetoId="@projeto.ProjetoId"><i class="bi bi-trash"></i></a>
                                         </div>
                                     </td>
                                 </tr>

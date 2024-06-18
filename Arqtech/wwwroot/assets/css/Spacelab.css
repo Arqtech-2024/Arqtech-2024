@@ -12369,6 +12369,13 @@ textarea.form-control-lg {
     height: 100%;
 }
 
+/*Card do detalhes*/
+.card-details {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .card {
     background-color: #fff;
     border-radius: 8px;
@@ -12376,4 +12383,12 @@ textarea.form-control-lg {
     padding: 20px;
     max-width: 600px;
     width: 100%;
+}
+
+/*Background da imagem*/
+.custom-image {
+    background-size: cover;
+    background-position: center;
+    width: 200px;
+    height: auto;
 }
